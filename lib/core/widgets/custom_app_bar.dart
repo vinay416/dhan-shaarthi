@@ -5,23 +5,32 @@ import 'package:flutter/material.dart';
 import '../string_const/icon_string.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key, this.actions = const [], this.title = ""});
+  const CustomAppBar({
+    super.key,
+    this.actions = const [],
+    this.title = "",
+    this.leading = true,
+  });
   final List<Widget> actions;
   final String title;
+  final bool leading;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: IconButton(
-        onPressed: context.pop,
-        icon: SizedBox.square(
-          dimension: 24,
-          child: Image.asset(kBackArrowIcon),
-        ),
-      ),
-
+      centerTitle: false,
+      leading:
+          leading
+              ? IconButton(
+                onPressed: context.pop,
+                icon: SizedBox.square(
+                  dimension: 24,
+                  child: Image.asset(kBackArrowIcon),
+                ),
+              )
+              : SizedBox.shrink(),
       titleSpacing: -5,
-      title: Text("", style: semiBoldTextStyle.copyWith(fontSize: 20)),
+      title: Text(title, style: semiBoldTextStyle.copyWith(fontSize: 20)),
       actions: actions,
     );
   }
