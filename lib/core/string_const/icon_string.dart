@@ -10,4 +10,6 @@ const String kDrawerIcon = "assets/icons/drawer.png";
 const String kWatchlistIcon = "assets/icons/watchlist.png";
 const String kChartsIcon = "assets/icons/charts.png";
 const String kHomeIcon = "assets/icons/home.png";
+const String kGraphSearchIcon = "assets/icons/graph.png";
+
 
