@@ -5,3 +5,5 @@ const String kPencilIcon = "assets/icons/pencil.png";
 const String kArrowDownIcon = "assets/icons/arrow_down.png";
 const String kArrowUpIcon = "assets/icons/arrow_up.png";
 const String kLogoIcon = "assets/icons/logo.webp";
+const String kDLogoIcon = "assets/icons/d.png";
+const String kDrawerIcon = "assets/icons/drawer.png";
