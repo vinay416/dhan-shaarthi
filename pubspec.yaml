@@ -1,0 +1,50 @@
+name: dhan_saarthi
+description: "A new Flutter project."
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ^3.7.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  equatable: ^2.0.7
+  dartz: ^0.10.1
+  internet_connection_checker: ^3.0.1
+  mockito: ^5.4.5
+  supabase_flutter: ^2.8.4
+  shared_preferences: ^2.5.2
+  flutter_bloc: ^9.1.0
+  get_it: ^8.0.3
+  fluttertoast: ^8.2.12
+  pinput: ^5.0.1
+  smart_auth: ^3.2.0
+  fl_chart: ^0.70.2
+  intl: ^0.20.2
+  material_segmented_control: ^5.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  build_runner: ^2.4.15
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/icons/
+
+  fonts:
+    - family: Gilroy
+      fonts:
+        - asset: assets/fonts/Gilroy-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Gilroy-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Gilroy-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Gilroy-SemiBold.ttf
+          weight: 600
