@@ -1,0 +1,28 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "dhan_saarthi",
+      "request": "launch",
+      "type": "dart",
+      "args": ["--dart-define-from-file", "secret_keys.json"]
+    },
+    {
+      "name": "dhan_saarthi (profile mode)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile",
+      "args": ["--dart-define-from-file", "secret_keys.json"]
+    },
+    {
+      "name": "dhan_saarthi (release mode)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release",
+      "args": ["--dart-define-from-file", "secret_keys.json"]
+    }
+  ]
+}

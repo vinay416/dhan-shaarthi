@@ -7,3 +7,7 @@ const String kArrowUpIcon = "assets/icons/arrow_up.png";
 const String kLogoIcon = "assets/icons/logo.webp";
 const String kDLogoIcon = "assets/icons/d.png";
 const String kDrawerIcon = "assets/icons/drawer.png";
+const String kWatchlistIcon = "assets/icons/watchlist.png";
+const String kChartsIcon = "assets/icons/charts.png";
+const String kHomeIcon = "assets/icons/home.png";
+
