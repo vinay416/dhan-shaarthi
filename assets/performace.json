@@ -1,0 +1,62 @@
+[
+    {
+        "x": 0,
+        "barRods": [
+            {
+                "toY": 190000,
+                "rodStackItems": [
+                    {
+                        "start": 0,
+                        "end": 100000,
+                        "color": "#ff0000"
+                    },
+                    {
+                        "start": 100000,
+                        "end": 190000,
+                        "color": "#0000ff"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "x": 1,
+        "barRods": [
+            {
+                "toY": 363000,
+                "rodStackItems": [
+                    {
+                        "start": 0,
+                        "end": 80000,
+                        "color": "#ff0000"
+                    },
+                    {
+                        "start": 80000,
+                        "end": 363000,
+                        "color": "#0000ff"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "x": 2,
+        "barRods": [
+            {
+                "toY": 455000,
+                "rodStackItems": [
+                    {
+                        "start": 0,
+                        "end": 40000,
+                        "color": "#ff0000"
+                    },
+                    {
+                        "start": 40000,
+                        "end": 455000,
+                        "color": "#0000ff"
+                    }
+                ]
+            }
+        ]
+    }
+]
