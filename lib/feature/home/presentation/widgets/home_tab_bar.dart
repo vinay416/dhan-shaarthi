@@ -15,6 +15,7 @@ class HomeTabBar extends StatelessWidget {
         border: Border.symmetric(
           horizontal: BorderSide(color: k454545Color, width: 0.2),
         ),
+        color: Colors.black54,
       ),
       height: 82,
       width: MediaQuery.of(context).size.width,
