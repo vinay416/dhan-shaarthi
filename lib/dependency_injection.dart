@@ -7,6 +7,7 @@ import 'package:dhan_saarthi/feature/fund_detail/data/data_source/fund_details_r
 import 'package:dhan_saarthi/feature/fund_detail/data/repository/fund_details_repository_impl.dart';
 import 'package:dhan_saarthi/feature/fund_detail/domain/respository/fund_details_repository.dart';
 import 'package:dhan_saarthi/feature/fund_detail/presentation/bloc/fund_detail_bloc.dart';
+import 'package:dhan_saarthi/feature/fund_detail/presentation/bloc/fund_graph/fund_graph_bloc.dart';
 import 'package:dhan_saarthi/feature/intro/data/data_source/intro_local_data_source.dart';
 import 'package:dhan_saarthi/feature/intro/data/repository/intro_repository_impl.dart';
 import 'package:dhan_saarthi/feature/intro/presentation/bloc/intro_bloc.dart';
@@ -67,6 +68,9 @@ Future<void> injectDependencies() async {
   di.registerFactory<HomeTabBarBloc>(() => HomeTabBarBloc());
   di.registerFactory<FundDetailBloc>(
     () => FundDetailBloc(getFundDetails: di()),
+  );
+  di.registerFactory<FundGraphBloc>(
+    () => FundGraphBloc(),
   );
   di.registerLazySingleton<GetFundDetails>(() => GetFundDetails(di()));
   di.registerLazySingleton<FundDetailsRepository>(
