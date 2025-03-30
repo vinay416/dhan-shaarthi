@@ -3,6 +3,7 @@ import 'package:dhan_saarthi/core/toast_helper..dart';
 import 'package:dhan_saarthi/feature/auth/data/respository/auth_repository_impl.dart';
 import 'package:dhan_saarthi/feature/auth/domain/usecase/send_otp_auth.dart';
 import 'package:dhan_saarthi/feature/auth/presentation/bloc/auth_bloc.dart';
+import 'package:dhan_saarthi/feature/fund_detail/presentation/bloc/fund_detail_bloc.dart';
 import 'package:dhan_saarthi/feature/intro/data/data_source/intro_local_data_source.dart';
 import 'package:dhan_saarthi/feature/intro/data/repository/intro_repository_impl.dart';
 import 'package:dhan_saarthi/feature/intro/presentation/bloc/intro_bloc.dart';
@@ -58,4 +59,6 @@ Future<void> injectDependencies() async {
     () => IntroLocalDataSourceImpl(prefs),
   );
 
+  di.registerFactory<HomeTabBarBloc>(() => HomeTabBarBloc());
+  di.registerFactory<FundDetailBloc>(()=> FundDetailBloc());
 }
