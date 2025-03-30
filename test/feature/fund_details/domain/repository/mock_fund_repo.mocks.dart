@@ -7,11 +7,7 @@ import 'dart:async' as _i4;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:dhan_saarthi/core/failure.dart' as _i5;
-import 'package:dhan_saarthi/feature/fund_detail/domain/enitiies/fund_invest_entity.dart'
-    as _i7;
-import 'package:dhan_saarthi/feature/fund_detail/domain/enitiies/fund_performace_enity.dart'
-    as _i8;
-import 'package:dhan_saarthi/feature/fund_detail/domain/enitiies/nav_entity.dart'
+import 'package:dhan_saarthi/feature/fund_detail/domain/enitiies/fund_details_entity.dart'
     as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -45,47 +41,17 @@ class MockFundRepo extends _i1.Mock implements _i3.FundRepo {
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i6.NavEntity>> getNavDetails() =>
+  _i4.Future<_i2.Either<_i5.Failure, _i6.FundDetailsEntity>> getFundDetails() =>
       (super.noSuchMethod(
-            Invocation.method(#getNavDetails, []),
-            returnValue:
-                _i4.Future<_i2.Either<_i5.Failure, _i6.NavEntity>>.value(
-                  _FakeEither_0<_i5.Failure, _i6.NavEntity>(
-                    this,
-                    Invocation.method(#getNavDetails, []),
-                  ),
-                ),
-          )
-          as _i4.Future<_i2.Either<_i5.Failure, _i6.NavEntity>>);
-
-  @override
-  _i4.Future<_i2.Either<_i5.Failure, _i7.FundInvestEntity>>
-  getFundInvestDetails() =>
-      (super.noSuchMethod(
-            Invocation.method(#getFundInvestDetails, []),
-            returnValue:
-                _i4.Future<_i2.Either<_i5.Failure, _i7.FundInvestEntity>>.value(
-                  _FakeEither_0<_i5.Failure, _i7.FundInvestEntity>(
-                    this,
-                    Invocation.method(#getFundInvestDetails, []),
-                  ),
-                ),
-          )
-          as _i4.Future<_i2.Either<_i5.Failure, _i7.FundInvestEntity>>);
-
-  @override
-  _i4.Future<_i2.Either<_i5.Failure, _i8.FundPerformaceEnity>>
-  getPerformanceDetails() =>
-      (super.noSuchMethod(
-            Invocation.method(#getPerformanceDetails, []),
+            Invocation.method(#getFundDetails, []),
             returnValue: _i4.Future<
-              _i2.Either<_i5.Failure, _i8.FundPerformaceEnity>
+              _i2.Either<_i5.Failure, _i6.FundDetailsEntity>
             >.value(
-              _FakeEither_0<_i5.Failure, _i8.FundPerformaceEnity>(
+              _FakeEither_0<_i5.Failure, _i6.FundDetailsEntity>(
                 this,
-                Invocation.method(#getPerformanceDetails, []),
+                Invocation.method(#getFundDetails, []),
               ),
             ),
           )
-          as _i4.Future<_i2.Either<_i5.Failure, _i8.FundPerformaceEnity>>);
+          as _i4.Future<_i2.Either<_i5.Failure, _i6.FundDetailsEntity>>);
 }
