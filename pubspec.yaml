@@ -23,6 +23,7 @@ dependencies:
   fl_chart: ^0.70.2
   intl: ^0.20.2
   material_segmented_control: ^5.0.1
+  dio: ^5.8.0+1
 
 dev_dependencies:
   flutter_test:
