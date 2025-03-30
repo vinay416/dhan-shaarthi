@@ -7,6 +7,6 @@ sealed class FundDetailEvent extends Equatable {
   List<Object> get props => [];
 }
 
-final class NavDetails extends FundDetailEvent{}
+final class ShowNavGraph extends FundDetailEvent {}
 
-final class InvestDetails extends FundDetailEvent{}
+final class ShowInvestGraph extends FundDetailEvent {}

@@ -5,12 +5,12 @@ part 'fund_detail_event.dart';
 part 'fund_detail_state.dart';
 
 class FundDetailBloc extends Bloc<FundDetailEvent, FundDetailState> {
-  FundDetailBloc() : super(FundInvest()) {
+  FundDetailBloc() : super(InvestGraph()) {
     on<FundDetailEvent>((event, emit) {
-      if (event is NavDetails) {
-        emit(FundNAV());
-      } else if (event is InvestDetails) {
-        emit(FundInvest());
+      if (event is ShowNavGraph) {
+        emit(NavGraph());
+      } else if (event is ShowInvestGraph) {
+        emit(InvestGraph());
       }
     });
   }
