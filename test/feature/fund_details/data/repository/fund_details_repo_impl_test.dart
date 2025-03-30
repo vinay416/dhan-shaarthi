@@ -1,10 +1,11 @@
 import 'package:dartz/dartz.dart';
-import 'package:dhan_saarthi/core/exceptions.dart';
 import 'package:dhan_saarthi/core/failure.dart';
+import 'package:dhan_saarthi/feature/fund_detail/data/models/fund_details_model.dart';
 import 'package:dhan_saarthi/feature/fund_detail/data/models/fund_invest_details_model.dart';
 import 'package:dhan_saarthi/feature/fund_detail/data/models/fund_performace_model.dart';
 import 'package:dhan_saarthi/feature/fund_detail/data/models/nav_details_model.dart';
 import 'package:dhan_saarthi/feature/fund_detail/data/repository/fund_details_repository_impl.dart';
+import 'package:dhan_saarthi/feature/fund_detail/domain/enitiies/bar_graph_data_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -15,75 +16,40 @@ void main() {
   final repoImpl = FundDetailsRepositoryImpl(remoteSource: mockRemoteSource);
 
   group("Fund Repo Impl", () {
-    test("Get Nav Success", () async {
+    test("Get Details Success", () async {
       //assert
-      final navModel = NavDetailsModel(lineGraphData: [], name: 'name');
-      when(mockRemoteSource.getNavDetails()).thenAnswer((_) async => navModel);
+      final nav = NavDetailsModel(lineGraphData: [], name: "name");
+      final invest = FundInvestDetailsModel(
+        fundLineGraphData: [],
+        investmentLineGraphData: [],
+        name: "name",
+      );
+      final performance = FundPerformaceModel(
+        name: "",
+        graphData: [BarGraphDataEntity(x: 0, barRods: [])],
+      );
+      final fund = FundDetailsModel(
+        fundNav: nav,
+        fundInvestment: invest,
+        fundPerformance: performance,
+      );
+      when(mockRemoteSource.getNavDetails()).thenAnswer((_) async => nav);
+      when(mockRemoteSource.getFundInvestDetails()).thenAnswer((_) async => invest);
+      when(mockRemoteSource.getFundPerformaceDetails()).thenAnswer((_) async => performance);
       //act
-      final response = await repoImpl.getNavDetails();
+      final response = await repoImpl.getFundDetails();
       //verify or expect
       verify(mockRemoteSource.getNavDetails());
-      expect(response, Right(navModel));
+      expect(response, Right(fund));
     });
 
     test("Get Nav Failed", () async {
       //assert
       when(mockRemoteSource.getNavDetails()).thenThrow(Exception());
       //act
-      final response = await repoImpl.getNavDetails();
+      final response = await repoImpl.getFundDetails();
       //verify or expect
       verify(mockRemoteSource.getNavDetails());
-      expect(response, Left(ServerFailure()));
-    });
-
-    test("Get Fund Invest Success", () async {
-      //assert
-      final investFundModel = FundInvestDetailsModel(
-        name: "",
-        fundLineGraphData: [],
-        investmentLineGraphData: [],
-      );
-      when(
-        mockRemoteSource.getFundInvestDetails(),
-      ).thenAnswer((_) async => investFundModel);
-      //act
-      final response = await repoImpl.getFundInvestDetails();
-      //verify or expect
-      verify(mockRemoteSource.getFundInvestDetails());
-      expect(response, Right(investFundModel));
-    });
-
-    test("Get Fund Invest Failed", () async {
-      //assert
-      when(mockRemoteSource.getFundInvestDetails()).thenThrow(Exception());
-      //act
-      final response = await repoImpl.getFundInvestDetails();
-      //verify or expect
-      verify(mockRemoteSource.getFundInvestDetails());
-      expect(response, Left(ServerFailure()));
-    });
-
-    test("Get fund performace success", () async{
-      //assert
-      final fundPerformaceModel = FundPerformaceModel(
-        name: "",
-        graphData: [],
-      );
-      when(mockRemoteSource.getFundPerformaceDetails()).thenAnswer((_) async =>fundPerformaceModel);
-      //act
-      final response = await repoImpl.getPerformanceDetails();
-      //verify or expect
-      verify(mockRemoteSource.getFundPerformaceDetails());
-      expect(response, Right(fundPerformaceModel));
-    });
-
-    test("Get fund performace failure", () async{
-      //assert
-      when(mockRemoteSource.getFundPerformaceDetails()).thenThrow(ServerException());
-      //act
-      final response = await repoImpl.getPerformanceDetails();
-      //verify or expect
-      verify(mockRemoteSource.getFundPerformaceDetails());
       expect(response, Left(ServerFailure()));
     });
   });

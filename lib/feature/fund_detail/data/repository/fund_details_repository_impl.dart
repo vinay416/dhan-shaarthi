@@ -1,40 +1,26 @@
 import 'package:dartz/dartz.dart';
 import 'package:dhan_saarthi/core/failure.dart';
 import 'package:dhan_saarthi/feature/fund_detail/data/data_source/fund_details_remote_source.dart';
-import 'package:dhan_saarthi/feature/fund_detail/domain/enitiies/fund_invest_entity.dart';
-import 'package:dhan_saarthi/feature/fund_detail/domain/enitiies/fund_performace_enity.dart';
-import 'package:dhan_saarthi/feature/fund_detail/domain/enitiies/nav_entity.dart';
+import 'package:dhan_saarthi/feature/fund_detail/domain/enitiies/fund_details_entity.dart';
 import '../../domain/respository/fund_details_repository.dart';
+import '../models/fund_details_model.dart';
 
 class FundDetailsRepositoryImpl implements FundDetailsRepository {
   const FundDetailsRepositoryImpl({required this.remoteSource});
   final FundDetailsRemoteSource remoteSource;
 
   @override
-  Future<Either<Failure, FundInvestEntity>> getFundInvestDetails() async {
-    try {
-      final investFundDetails = await remoteSource.getFundInvestDetails();
-      return Right(investFundDetails);
-    } catch (e) {
-      return Left(ServerFailure());
-    }
-  }
-
-  @override
-  Future<Either<Failure, NavEntity>> getNavDetails() async {
+  Future<Either<Failure, FundDetailsEntity>> getFundDetails() async {
     try {
       final navDetails = await remoteSource.getNavDetails();
-      return Right(navDetails);
-    } catch (e) {
-      return Left(ServerFailure());
-    }
-  }
-
-  @override
-  Future<Either<Failure, FundPerformaceEnity>> getPerformanceDetails() async {
-    try {
+      final investFundDetails = await remoteSource.getFundInvestDetails();
       final performanceDetails = await remoteSource.getFundPerformaceDetails();
-      return Right(performanceDetails);
+      final details = FundDetailsModel(
+        fundNav: navDetails,
+        fundInvestment: investFundDetails,
+        fundPerformance: performanceDetails,
+      );
+      return Right(details);
     } catch (e) {
       return Left(ServerFailure());
     }
