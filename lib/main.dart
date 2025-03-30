@@ -1,5 +1,6 @@
 import 'package:dhan_saarthi/dependency_injection.dart';
 import 'package:dhan_saarthi/feature/auth/presentation/bloc/auth_bloc.dart';
+import 'package:dhan_saarthi/feature/fund_detail/presentation/bloc/fund_detail_bloc.dart';
 import 'package:dhan_saarthi/feature/home/presentation/bloc/tab_bar/home_tab_bar_bloc.dart';
 import 'package:dhan_saarthi/feature/intro/presentation/bloc/intro_bloc.dart';
 import 'package:dhan_saarthi/routes/routes.dart';
@@ -27,6 +28,7 @@ class MainApp extends StatelessWidget {
         BlocProvider(create: (_) => di<AuthBloc>()..add(InitialAuth())),
         BlocProvider(create: (_) => di<IntroBloc>()),
         BlocProvider(create: (_) => di<HomeTabBarBloc>()),
+        BlocProvider(create: (_) => di<FundDetailBloc>()),
       ],
       child: AuthWatcher(
         child: MaterialApp(
