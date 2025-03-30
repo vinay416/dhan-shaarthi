@@ -7,6 +7,16 @@ sealed class FundDetailState extends Equatable {
   List<Object> get props => [];
 }
 
-final class NavGraph extends FundDetailState {}
+final class FundDetailsLoading extends FundDetailState {}
 
-final class InvestGraph extends FundDetailState {}
+final class FundDetailsLoaded extends FundDetailState {
+  const FundDetailsLoaded(this.fundDetails);
+  final FundDetailsEntity fundDetails;
+
+  @override
+  List<Object> get props => [fundDetails];
+}
+
+final class FundDetailsError extends FundDetailState {}
+
+
