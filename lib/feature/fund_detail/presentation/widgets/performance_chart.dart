@@ -3,9 +3,11 @@ import 'package:dhan_saarthi/theme/app_theme.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-class PerformanceChart extends StatefulWidget {
-  const PerformanceChart({super.key});
+import '../../domain/enitiies/fund_performace_enity.dart';
 
+class PerformanceChart extends StatefulWidget {
+  const PerformanceChart({super.key, required this.performaceData});
+  final FundPerformaceEntity performaceData;
   final Color dark = k3D3D3DColor;
   final Color normal = kGreenColor;
 
@@ -105,58 +107,35 @@ class PerformanceChartState extends State<PerformanceChart> {
   }
 
   List<BarChartGroupData> getData(double barsWidth, double barsSpace) {
-    return [
-      BarChartGroupData(
-        x: 0,
-        barsSpace: barsSpace,
-        showingTooltipIndicators: [0],
-        barRods: [
-          BarChartRodData(
-            toY: 190000,
-            rodStackItems: [
-              BarChartRodStackItem(0, 100000, widget.dark),
-              BarChartRodStackItem(100000, 190000, widget.normal),
-            ],
-            borderRadius: BorderRadius.zero,
-            width: barsWidth,
-            color: Colors.transparent,
+    return widget.performaceData.graphData
+        .map(
+          (e) => BarChartGroupData(
+            x: e.x,
+            barsSpace: barsSpace,
+            showingTooltipIndicators: [0],
+            barRods:
+                e.barRods
+                    .map(
+                      (e) => BarChartRodData(
+                        toY: e.toY,
+                        rodStackItems:
+                            e.bars
+                                .map(
+                                  (e) => BarChartRodStackItem(
+                                    e.start.toDouble(),
+                                    e.end.toDouble(),
+                                    e.color,
+                                  ),
+                                )
+                                .toList(),
+                        borderRadius: BorderRadius.zero,
+                        width: barsWidth,
+                        color: Colors.transparent,
+                      ),
+                    )
+                    .toList(),
           ),
-        ],
-      ),
-      BarChartGroupData(
-        x: 1,
-        showingTooltipIndicators: [0],
-        barsSpace: barsSpace,
-        barRods: [
-          BarChartRodData(
-            toY: 363000,
-            rodStackItems: [
-              BarChartRodStackItem(0, 80000, widget.dark),
-              BarChartRodStackItem(80000, 363000, widget.normal),
-            ],
-            borderRadius: BorderRadius.zero,
-            width: barsWidth,
-            color: Colors.transparent,
-          ),
-        ],
-      ),
-      BarChartGroupData(
-        x: 2,
-        showingTooltipIndicators: [0],
-        barsSpace: barsSpace,
-        barRods: [
-          BarChartRodData(
-            toY: 455000,
-            rodStackItems: [
-              BarChartRodStackItem(0, 40000, widget.dark),
-              BarChartRodStackItem(40000, 455000, widget.normal),
-            ],
-            borderRadius: BorderRadius.zero,
-            width: barsWidth,
-            color: Colors.transparent,
-          ),
-        ],
-      ),
-    ];
+        )
+        .toList();
   }
 }

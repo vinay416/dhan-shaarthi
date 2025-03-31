@@ -1,3 +1,4 @@
+import 'package:dhan_saarthi/feature/fund_detail/domain/enitiies/fund_invest_entity.dart';
 import 'package:dhan_saarthi/feature/fund_detail/presentation/widgets/two_line_chart.dart';
 import 'package:dhan_saarthi/theme/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,8 @@ import '../bloc/fund_graph/fund_graph_bloc.dart';
 import 'nav_button.dart';
 
 class GraphTwoLine extends StatelessWidget {
-  const GraphTwoLine({super.key});
+  const GraphTwoLine({super.key, required this.fundInvestDetails});
+  final FundInvestEntity fundInvestDetails;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,10 @@ class GraphTwoLine extends StatelessWidget {
       children: [
         buildTopDetail(context),
         SizedBox(height: 16),
-        SizedBox(height: 209, child: TwoLineChart()),
+        SizedBox(
+          height: 209,
+          child: TwoLineChart(fundInvestDetails: fundInvestDetails),
+        ),
       ],
     );
   }

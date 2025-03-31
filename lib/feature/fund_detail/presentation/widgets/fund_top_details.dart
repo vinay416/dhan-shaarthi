@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import '../../../../theme/app_theme.dart';
 
 class FundTopDetails extends StatelessWidget {
-  const FundTopDetails({super.key});
+  const FundTopDetails({super.key, required this.fundName});
+  final String fundName;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class FundTopDetails extends StatelessWidget {
         ConstrainedBox(
           constraints: BoxConstraints(maxWidth: 200),
           child: Text(
-            "Motilal Oswal Midcap Direct Growth",
+            fundName,
             style: semiBoldTextStyle.copyWith(fontSize: 18),
           ),
         ),

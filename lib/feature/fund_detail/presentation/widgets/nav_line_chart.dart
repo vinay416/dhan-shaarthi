@@ -1,21 +1,19 @@
-import 'dart:convert';
-
 import 'package:dhan_saarthi/theme/app_theme.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
 import '../../../../core/format_currency.dart';
+import '../../domain/enitiies/nav_entity.dart';
 
 class NAVLineChart extends StatefulWidget {
-  const NAVLineChart({super.key});
+  const NAVLineChart({super.key, required this.navDetails});
+  final NavEntity navDetails;
 
   @override
   State<NAVLineChart> createState() => _NAVLineChartState();
 }
 
 class _NAVLineChartState extends State<NAVLineChart> {
-  List<(DateTime, double)>? _bitcoinPriceHistory;
+  late List<(DateTime, double)>? navGraph;
 
   @override
   void initState() {
@@ -24,23 +22,21 @@ class _NAVLineChartState extends State<NAVLineChart> {
   }
 
   void _reloadData() async {
-    final dataStr = await rootBundle.loadString('assets/nav_data.json');
-    final json = jsonDecode(dataStr) as Map<String, dynamic>;
-
-    _bitcoinPriceHistory =
-        (json['prices'] as List).map((item) {
-          final timestamp = item[0] as int;
-          final price = item[1] as double;
-          return (DateTime.fromMillisecondsSinceEpoch(timestamp), price);
-        }).toList();
-
-    setState(() {});
+    navGraph =
+        widget.navDetails.lineGraphData
+            .map(
+              (e) => (
+                DateTime.fromMillisecondsSinceEpoch(e.timestamp),
+                e.value,
+              ),
+            )
+            .toList();
   }
 
   @override
   Widget build(BuildContext context) {
     final spots =
-        _bitcoinPriceHistory?.asMap().entries.map((e) {
+        navGraph?.asMap().entries.map((e) {
           final index = e.key;
           final item = e.value;
           final value = item.$2;
@@ -107,7 +103,7 @@ class _NAVLineChartState extends State<NAVLineChart> {
             getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
               return touchedBarSpots.map((barSpot) {
                 final price = barSpot.y;
-                final date = _bitcoinPriceHistory![barSpot.x.toInt()].$1;
+                final date = navGraph![barSpot.x.toInt()].$1;
                 return LineTooltipItem(
                   '',
                   const TextStyle(
@@ -145,10 +141,10 @@ class _NAVLineChartState extends State<NAVLineChart> {
         titlesData: FlTitlesData(
           bottomTitles: AxisTitles(
             sideTitles: SideTitles(
-              interval: (_bitcoinPriceHistory?.length ?? 10) / 3,
+              interval: (navGraph?.length ?? 10) / 3,
               showTitles: true,
               getTitlesWidget: (double value, TitleMeta meta) {
-                final date = _bitcoinPriceHistory?[value.toInt()].$1;
+                final date = navGraph?[value.toInt()].$1;
                 return SideTitleWidget(
                   fitInside: SideTitleFitInsideData.fromTitleMeta(meta),
                   meta: meta,

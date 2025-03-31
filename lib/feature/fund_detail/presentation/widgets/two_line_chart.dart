@@ -1,22 +1,22 @@
-import 'dart:convert';
-
-import 'package:dhan_saarthi/theme/app_theme.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
+import 'package:dhan_saarthi/theme/app_theme.dart';
 
 import '../../../../core/format_currency.dart';
+import '../../domain/enitiies/fund_invest_entity.dart';
 
 class TwoLineChart extends StatefulWidget {
-  const TwoLineChart({super.key});
+  const TwoLineChart({super.key, required this.fundInvestDetails});
+  final FundInvestEntity fundInvestDetails;
 
   @override
   State<TwoLineChart> createState() => _TwoLineChartState();
 }
 
 class _TwoLineChartState extends State<TwoLineChart> {
-  List<(DateTime, double)>? _bitcoinPriceHistory;
-  List<(DateTime, double)>? _fundPriceHistory;
+  List<(DateTime, double)>? fundGraph;
+  List<(DateTime, double)>? investGraph;
 
   @override
   void initState() {
@@ -25,30 +25,31 @@ class _TwoLineChartState extends State<TwoLineChart> {
   }
 
   void _reloadData() async {
-    final dataStr = await rootBundle.loadString('assets/fund_data.json');
-    final json = jsonDecode(dataStr) as Map<String, dynamic>;
+    fundGraph =
+        widget.fundInvestDetails.fundLineGraphData
+            .map(
+              (e) => (
+                DateTime.fromMillisecondsSinceEpoch(e.timestamp),
+                e.value,
+              ),
+            )
+            .toList();
 
-    _bitcoinPriceHistory =
-        (json['prices_line_1'] as List).map((item) {
-          final timestamp = item[0] as int;
-          final price = item[1] as double;
-          return (DateTime.fromMillisecondsSinceEpoch(timestamp), price);
-        }).toList();
-
-    _fundPriceHistory =
-        (json['prices_line_2'] as List).map((item) {
-          final timestamp = item[0] as int;
-          final price = item[1] as double;
-          return (DateTime.fromMillisecondsSinceEpoch(timestamp), price);
-        }).toList();
-
-    setState(() {});
+    investGraph =
+        widget.fundInvestDetails.investmentLineGraphData
+            .map(
+              (e) => (
+                DateTime.fromMillisecondsSinceEpoch(e.timestamp),
+                e.value,
+              ),
+            )
+            .toList();
   }
 
   @override
   Widget build(BuildContext context) {
     final spots =
-        _bitcoinPriceHistory?.asMap().entries.map((e) {
+        fundGraph?.asMap().entries.map((e) {
           final index = e.key;
           final item = e.value;
           final value = item.$2;
@@ -57,7 +58,7 @@ class _TwoLineChartState extends State<TwoLineChart> {
         [];
 
     final spots2 =
-        _fundPriceHistory?.asMap().entries.map((e) {
+        investGraph?.asMap().entries.map((e) {
           final index = e.key;
           final item = e.value;
           final value = item.$2;
@@ -146,19 +147,19 @@ class _TwoLineChartState extends State<TwoLineChart> {
                 if (isFirstLine) {
                   return null;
                 }
-                final date = _bitcoinPriceHistory![barSpot.x.toInt()].$1;
+                final date = fundGraph![barSpot.x.toInt()].$1;
                 final price1 =
                     isFirstLine
-                        ? _bitcoinPriceHistory![barSpot.x.toInt()]
+                        ? fundGraph![barSpot.x.toInt()]
                             .$2 // If first line, show prices_line_1
-                        : _fundPriceHistory![barSpot.x.toInt()]
+                        : investGraph![barSpot.x.toInt()]
                             .$2; // Otherwise, show prices_line_2
 
                 final price2 =
                     isFirstLine
-                        ? _fundPriceHistory![barSpot.x.toInt()]
+                        ? investGraph![barSpot.x.toInt()]
                             .$2 // If first line, show prices_line_2
-                        : _bitcoinPriceHistory![barSpot.x.toInt()]
+                        : fundGraph![barSpot.x.toInt()]
                             .$2; // Otherwise, show prices_line_1
 
                 return LineTooltipItem(
@@ -223,10 +224,10 @@ class _TwoLineChartState extends State<TwoLineChart> {
         titlesData: FlTitlesData(
           bottomTitles: AxisTitles(
             sideTitles: SideTitles(
-              interval: (_bitcoinPriceHistory?.length ?? 10) / 3,
+              interval: (fundGraph?.length ?? 10) / 3,
               showTitles: true,
               getTitlesWidget: (double value, TitleMeta meta) {
-                final date = _bitcoinPriceHistory?[value.toInt()].$1;
+                final date = fundGraph?[value.toInt()].$1;
                 return SideTitleWidget(
                   fitInside: SideTitleFitInsideData.fromTitleMeta(meta),
                   meta: meta,

@@ -1,3 +1,4 @@
+import 'package:dhan_saarthi/feature/fund_detail/domain/enitiies/nav_entity.dart';
 import 'package:dhan_saarthi/feature/fund_detail/presentation/widgets/nav_line_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:dhan_saarthi/theme/app_theme.dart';
@@ -7,7 +8,8 @@ import '../bloc/fund_graph/fund_graph_bloc.dart';
 import 'nav_button.dart';
 
 class GraphOneLine extends StatelessWidget {
-  const GraphOneLine({super.key});
+  const GraphOneLine({super.key, required this.navDetails});
+  final NavEntity navDetails;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,7 @@ class GraphOneLine extends StatelessWidget {
       children: [
         buildTopDetail(context),
         SizedBox(height: 16),
-        SizedBox(height: 209, child: NAVLineChart()),
+        SizedBox(height: 209, child: NAVLineChart(navDetails: navDetails)),
       ],
     );
   }

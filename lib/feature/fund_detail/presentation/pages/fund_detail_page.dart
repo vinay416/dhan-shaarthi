@@ -59,26 +59,29 @@ class _FundDetailPageState extends State<FundDetailPage> {
         ],
       ),
       body: Stack(
-        children: [buildScreen(), Positioned(bottom: 0, child: FundButtons())],
+        children: [
+          buildScreen(details),
+          Positioned(bottom: 0, child: FundButtons()),
+        ],
       ),
     );
   }
 
-  Widget buildScreen() {
+  Widget buildScreen(FundDetailsEntity details) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24),
       child: SingleChildScrollView(
         child: Column(
           children: [
-            FundTopDetails(),
+            FundTopDetails(fundName: details.fundNav.name),
             SizedBox(height: 24),
             FundInvestDetails(),
             SizedBox(height: 24),
-            buildGraph(),
+            buildGraph(details),
             SizedBox(height: 12),
             FundSegmentControl(),
             SizedBox(height: 46),
-            FundPerformace(),
+            FundPerformace(performaceData: details.fundPerformance),
             SizedBox(height: 100),
           ],
         ),
@@ -86,17 +89,17 @@ class _FundDetailPageState extends State<FundDetailPage> {
     );
   }
 
-  Widget buildGraph() {
-    return SizedBox(
-      // height: 263,
-      child: BlocBuilder<FundGraphBloc, FundGraphState>(
-        builder: (context, state) {
-          return AnimatedSwitcher(
-            duration: Durations.long2,
-            child: (state is NavGraph) ? GraphOneLine() : GraphTwoLine(),
-          );
-        },
-      ),
+  Widget buildGraph(FundDetailsEntity details) {
+    return BlocBuilder<FundGraphBloc, FundGraphState>(
+      builder: (context, state) {
+        return AnimatedSwitcher(
+          duration: Durations.long2,
+          child:
+              (state is NavGraph)
+                  ? GraphOneLine(navDetails: details.fundNav)
+                  : GraphTwoLine(fundInvestDetails: details.fundInvestment),
+        );
+      },
     );
   }
 }
