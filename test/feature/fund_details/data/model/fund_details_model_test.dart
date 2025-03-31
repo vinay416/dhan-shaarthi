@@ -5,6 +5,7 @@ import 'package:dhan_saarthi/feature/fund_detail/data/models/fund_invest_details
 import 'package:dhan_saarthi/feature/fund_detail/data/models/fund_performace_model.dart';
 import 'package:dhan_saarthi/feature/fund_detail/data/models/graph_data_model.dart';
 import 'package:dhan_saarthi/feature/fund_detail/data/models/nav_details_model.dart';
+import 'package:dhan_saarthi/theme/app_theme.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../../fixtures/fixtures.dart';
@@ -133,8 +134,8 @@ void main() {
             BarDataModel(
               toY: 190000,
               bars: [
-                BarItemModel(start: 0, end: 100000),
-                BarItemModel(start: 100000, end: 190000),
+                BarItemModel(start: 0, end: 100000, color: k3D3D3DColor),
+                BarItemModel(start: 100000, end: 190000, color: kGreenColor),
               ],
             ),
           ],
@@ -145,8 +146,8 @@ void main() {
             BarDataModel(
               toY: 363000,
               bars: [
-                BarItemModel(start: 0, end: 80000),
-                BarItemModel(start: 80000, end: 363000),
+                BarItemModel(start: 0, end: 80000, color: k3D3D3DColor),
+                BarItemModel(start: 80000, end: 363000, color: kGreenColor),
               ],
             ),
           ],
@@ -157,8 +158,8 @@ void main() {
             BarDataModel(
               toY: 455000,
               bars: [
-                BarItemModel(start: 0, end: 40000),
-                BarItemModel(start: 40000, end: 455000),
+                BarItemModel(start: 0, end: 40000, color: k3D3D3DColor),
+                BarItemModel(start: 40000, end: 455000, color: kGreenColor),
               ],
             ),
           ],

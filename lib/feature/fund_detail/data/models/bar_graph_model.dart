@@ -1,4 +1,5 @@
 import 'package:dhan_saarthi/feature/fund_detail/domain/enitiies/bar_graph_data_entity.dart';
+import 'package:flutter/widgets.dart';
 
 class BarGraphModel extends BarGraphDataEntity {
   const BarGraphModel({required super.x, required super.barRods});
@@ -22,9 +23,18 @@ class BarDataModel extends BarsData {
 }
 
 class BarItemModel extends BarItem {
-  const BarItemModel({required super.end, required super.start});
+  const BarItemModel({
+    required super.end,
+    required super.start,
+    required super.color,
+  });
 
   factory BarItemModel.fromJson(Map<String, dynamic> json) {
-    return BarItemModel(end: json["end"] as num, start: json["start"] as num);
+    final color = Color(int.parse(json["color"]));
+    return BarItemModel(
+      end: json["end"] as num,
+      start: json["start"] as num,
+      color: color,
+    );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
 class BarGraphDataEntity extends Equatable {
   const BarGraphDataEntity({required this.x, required this.barRods});
@@ -19,9 +20,10 @@ class BarsData extends Equatable {
 }
 
 class BarItem extends Equatable {
-  const BarItem({required this.end, required this.start});
+  const BarItem({required this.end, required this.start, required this.color});
   final num start;
   final num end;
+  final Color color;
   @override
-  List<Object?> get props => [start, end];
+  List<Object?> get props => [start, end, color];
 }
