@@ -10,12 +10,12 @@
                         {
                             "start": 0,
                             "end": 100000,
-                            "color": "#ff0000"
+                            "color": "0xFF3D3D3D"
                         },
                         {
                             "start": 100000,
                             "end": 190000,
-                            "color": "#0000ff"
+                            "color": "0xFF4CAF50"
                         }
                     ]
                 }
@@ -30,12 +30,12 @@
                         {
                             "start": 0,
                             "end": 80000,
-                            "color": "#ff0000"
+                            "color": "0xFF3D3D3D"
                         },
                         {
                             "start": 80000,
                             "end": 363000,
-                            "color": "#0000ff"
+                            "color": "0xFF4CAF50"
                         }
                     ]
                 }
@@ -50,12 +50,12 @@
                         {
                             "start": 0,
                             "end": 40000,
-                            "color": "#ff0000"
+                            "color": "0xFF3D3D3D"
                         },
                         {
                             "start": 40000,
                             "end": 455000,
-                            "color": "#0000ff"
+                            "color": "0xFF4CAF50"
                         }
                     ]
                 }
