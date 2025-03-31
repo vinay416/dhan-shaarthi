@@ -16,7 +16,8 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, Unit>> sendOTP(PhoneNumber phoneNo) async {
     try {
-      await authRemoteSource.sendOTP(phoneNo.number);
+      final phoneNumber = phoneNo.countryCode + phoneNo.number;
+      await authRemoteSource.sendOTP(phoneNumber);
       return Right(unit);
     } on AuthException catch (e) {
       return Left(SendOTPFailure(e.message));
@@ -31,7 +32,8 @@ class AuthRepositoryImpl implements AuthRepository {
     PhoneNumber phone,
   ) async {
     try {
-      final user = await authRemoteSource.verifyOTP(otp.otp, phone.number);
+      final phoneNumber = phone.countryCode + phone.number;
+      final user = await authRemoteSource.verifyOTP(otp.otp, phoneNumber);
       return Right(user);
     } on AuthException catch (e) {
       return Left(VerifyOTPFailure(e.message));
