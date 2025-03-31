@@ -17,12 +17,9 @@ class UnauthenticatedPage extends StatelessWidget {
       appBar: AppBar(toolbarHeight: 0),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [buildTop(), buildBottom()],
-        ),
+        child: buildTop(),
       ),
+      bottomNavigationBar: buildBottom(),
     );
   }
 
@@ -47,6 +44,7 @@ class UnauthenticatedPage extends StatelessWidget {
 
   Widget buildBottom() {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Align(alignment: Alignment.center, child: TermsPolicy()),
         SizedBox(height: 18),

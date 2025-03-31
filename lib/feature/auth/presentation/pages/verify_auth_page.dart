@@ -26,20 +26,9 @@ class VerifyAuthPage extends StatelessWidget {
       appBar: AppBar(toolbarHeight: 0),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24).copyWith(top: 36),
-        child: Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                buildTop(),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.3),
-                buildBottom(),
-              ],
-            ),
-          ),
-        ),
+        child: SingleChildScrollView(child: buildTop()),
       ),
+      bottomNavigationBar: buildBottom(),
     );
   }
 
@@ -61,6 +50,12 @@ class VerifyAuthPage extends StatelessWidget {
   }
 
   Widget buildBottom() {
-    return Align(alignment: Alignment.center, child: TermsPolicy());
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Align(alignment: Alignment.center, child: TermsPolicy()),
+        SizedBox(height: 18),
+      ],
+    );
   }
 }
