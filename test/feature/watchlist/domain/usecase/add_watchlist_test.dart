@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:dhan_saarthi/feature/watchlist/domain/enities/watchlist_entity.dart';
 import 'package:dhan_saarthi/feature/watchlist/domain/usecase/add_watchlist.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -12,10 +11,9 @@ void main() {
 
   test("verify AddWatchlist mockRepo call", () async {
     //assert
-    final expected = [WatchlistEntity(fundsList: [], id: "")];
     when(mockRepo.addWatchlist(any)).thenAnswer((_) async => Right(unit));
     //act
-    final response = await usecase.call(expected.first);
+    final response = await usecase.call("watchlist 1");
     //verify or expect
     verify(mockRepo.addWatchlist(any));
     expect(response, Right(unit));

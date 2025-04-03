@@ -7,6 +7,8 @@ import 'dart:async' as _i4;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:dhan_saarthi/core/failure.dart' as _i5;
+import 'package:dhan_saarthi/feature/watchlist/domain/enities/fund_entity.dart'
+    as _i7;
 import 'package:dhan_saarthi/feature/watchlist/domain/enities/watchlist_entity.dart'
     as _i6;
 import 'package:mockito/mockito.dart' as _i1;
@@ -58,7 +60,7 @@ class MockWatchlistRepo extends _i1.Mock implements _i3.WatchlistRepo {
 
   @override
   _i4.Future<_i2.Either<_i5.Failure, _i2.Unit>> addWatchlist(
-    _i6.WatchlistEntity? watchlist,
+    String? watchlist,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#addWatchlist, [watchlist]),
@@ -72,15 +74,22 @@ class MockWatchlistRepo extends _i1.Mock implements _i3.WatchlistRepo {
           as _i4.Future<_i2.Either<_i5.Failure, _i2.Unit>>);
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, _i2.Unit>> updateWatchlist(
-    _i6.WatchlistEntity? watchlist,
-  ) =>
+  _i4.Future<_i2.Either<_i5.Failure, _i2.Unit>> updateWatchlist({
+    required String? oldName,
+    required String? newName,
+  }) =>
       (super.noSuchMethod(
-            Invocation.method(#updateWatchlist, [watchlist]),
+            Invocation.method(#updateWatchlist, [], {
+              #oldName: oldName,
+              #newName: newName,
+            }),
             returnValue: _i4.Future<_i2.Either<_i5.Failure, _i2.Unit>>.value(
               _FakeEither_0<_i5.Failure, _i2.Unit>(
                 this,
-                Invocation.method(#updateWatchlist, [watchlist]),
+                Invocation.method(#updateWatchlist, [], {
+                  #oldName: oldName,
+                  #newName: newName,
+                }),
               ),
             ),
           )
@@ -88,7 +97,7 @@ class MockWatchlistRepo extends _i1.Mock implements _i3.WatchlistRepo {
 
   @override
   _i4.Future<_i2.Either<_i5.Failure, _i2.Unit>> deleteWatchlist(
-    _i6.WatchlistEntity? watchlist,
+    String? watchlist,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#deleteWatchlist, [watchlist]),
@@ -96,6 +105,50 @@ class MockWatchlistRepo extends _i1.Mock implements _i3.WatchlistRepo {
               _FakeEither_0<_i5.Failure, _i2.Unit>(
                 this,
                 Invocation.method(#deleteWatchlist, [watchlist]),
+              ),
+            ),
+          )
+          as _i4.Future<_i2.Either<_i5.Failure, _i2.Unit>>);
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, _i2.Unit>> addFund({
+    required String? watchlist,
+    required _i7.FundEntity? fund,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#addFund, [], {
+              #watchlist: watchlist,
+              #fund: fund,
+            }),
+            returnValue: _i4.Future<_i2.Either<_i5.Failure, _i2.Unit>>.value(
+              _FakeEither_0<_i5.Failure, _i2.Unit>(
+                this,
+                Invocation.method(#addFund, [], {
+                  #watchlist: watchlist,
+                  #fund: fund,
+                }),
+              ),
+            ),
+          )
+          as _i4.Future<_i2.Either<_i5.Failure, _i2.Unit>>);
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, _i2.Unit>> deleteFund({
+    required String? watchlist,
+    required _i7.FundEntity? fund,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#deleteFund, [], {
+              #watchlist: watchlist,
+              #fund: fund,
+            }),
+            returnValue: _i4.Future<_i2.Either<_i5.Failure, _i2.Unit>>.value(
+              _FakeEither_0<_i5.Failure, _i2.Unit>(
+                this,
+                Invocation.method(#deleteFund, [], {
+                  #watchlist: watchlist,
+                  #fund: fund,
+                }),
               ),
             ),
           )

@@ -95,9 +95,7 @@ class MockMyAddWatchlist extends _i1.Mock implements _i4.MyAddWatchlist {
           as _i2.WatchlistRepository);
 
   @override
-  _i5.Future<_i3.Either<_i6.Failure, _i3.Unit>> call(
-    _i7.WatchlistEntity? watchlist,
-  ) =>
+  _i5.Future<_i3.Either<_i6.Failure, _i3.Unit>> call(String? watchlist) =>
       (super.noSuchMethod(
             Invocation.method(#call, [watchlist]),
             returnValue: _i5.Future<_i3.Either<_i6.Failure, _i3.Unit>>.value(
@@ -130,15 +128,22 @@ class MockMyUpdateWatchlist extends _i1.Mock implements _i4.MyUpdateWatchlist {
           as _i2.WatchlistRepository);
 
   @override
-  _i5.Future<_i3.Either<_i6.Failure, _i3.Unit>> call(
-    _i7.WatchlistEntity? watchlist,
-  ) =>
+  _i5.Future<_i3.Either<_i6.Failure, _i3.Unit>> call({
+    required String? oldName,
+    required String? newName,
+  }) =>
       (super.noSuchMethod(
-            Invocation.method(#call, [watchlist]),
+            Invocation.method(#call, [], {
+              #oldName: oldName,
+              #newName: newName,
+            }),
             returnValue: _i5.Future<_i3.Either<_i6.Failure, _i3.Unit>>.value(
               _FakeEither_1<_i6.Failure, _i3.Unit>(
                 this,
-                Invocation.method(#call, [watchlist]),
+                Invocation.method(#call, [], {
+                  #oldName: oldName,
+                  #newName: newName,
+                }),
               ),
             ),
           )
@@ -165,9 +170,7 @@ class MockMyDeleteWatchlist extends _i1.Mock implements _i4.MyDeleteWatchlist {
           as _i2.WatchlistRepository);
 
   @override
-  _i5.Future<_i3.Either<_i6.Failure, _i3.Unit>> call(
-    _i7.WatchlistEntity? watchlist,
-  ) =>
+  _i5.Future<_i3.Either<_i6.Failure, _i3.Unit>> call(String? watchlist) =>
       (super.noSuchMethod(
             Invocation.method(#call, [watchlist]),
             returnValue: _i5.Future<_i3.Either<_i6.Failure, _i3.Unit>>.value(
