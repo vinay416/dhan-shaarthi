@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:dhan_saarthi/core/exceptions.dart';
 
 import 'package:dhan_saarthi/core/failure.dart';
 import 'package:dhan_saarthi/feature/watchlist/data/data_source/watchlist_local_data_source.dart';
@@ -17,8 +18,8 @@ class WatchlistRepositoryImpl implements WatchlistRepository {
     try {
       await localDataSource.addWatchlist(WatchlistModel.fromEntity(watchlist));
       return Right(unit);
-    } catch (e) {
-      return Left(CacheFailure());
+    } on CacheException catch (e) {
+      return Left(CacheFailure(msg: e.msg ?? "Cache failure"));
     }
   }
 

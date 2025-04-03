@@ -17,7 +17,8 @@ class ServerFailure extends Failure {
 }
 
 class CacheFailure extends Failure {
-  final String msg = "cache failure";
+  const CacheFailure({this.msg = "Cache failure"});
+  final String msg;
 
   @override
   List<Object> get props => [msg];

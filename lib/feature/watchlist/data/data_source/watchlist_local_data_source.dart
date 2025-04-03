@@ -23,6 +23,12 @@ class WatchlistLocalDataSourceImpl implements WatchlistLocalDataSource {
     final stringWatchList =
         preferences.getStringList(WATCHLIST_PREFS_KEY) ?? [];
     final watchListId = watchlist.id;
+    if (stringWatchList.contains(watchListId)) {
+      throw CacheException(
+        msg: "Watchlist already exist with same $watchListId",
+      );
+    }
+
     final List<String> newStringList = [...stringWatchList, watchListId];
     final success = await preferences.setStringList(
       WATCHLIST_PREFS_KEY,
@@ -74,7 +80,7 @@ class WatchlistLocalDataSourceImpl implements WatchlistLocalDataSource {
   Future<void> updateWatchlist(WatchlistModel watchlist) async {
     final oldWatchList = preferences.getStringList(WATCHLIST_PREFS_KEY) ?? [];
     if (oldWatchList.isEmpty) throw CacheException();
-    
+
     final oldDataString = preferences.getString(watchlist.id);
     if (oldDataString == null) throw CacheException();
 

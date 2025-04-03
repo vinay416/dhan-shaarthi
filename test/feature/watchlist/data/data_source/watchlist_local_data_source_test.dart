@@ -74,6 +74,18 @@ void main() {
       expect(watchitem, TypeMatcher<WatchlistModel>());
     });
 
+    test("Add watchlist [watchlist 1] when already exsits", () async {
+      //assert
+      final List<String> watchListString = ["watchlist 1"];
+      when(mockPrefs.getStringList(any)).thenReturn(watchListString);
+      //act
+      final watchitem = WatchlistModel(id: "watchlist 1", fundsList: []);
+      final call = localSource.addWatchlist(watchitem);
+      //verify or expect
+      expect(() async => await call, throwsA(TypeMatcher<CacheException>()));
+      verify(mockPrefs.getStringList(any));
+    });
+
     test("Add watchlist [watchlist 1] with funds success", () async {
       //assert
       final List<String> watchListString = [];
