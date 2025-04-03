@@ -6,6 +6,7 @@ import 'package:dhan_saarthi/feature/watchlist/data/data_source/watchlist_local_
 import 'package:dhan_saarthi/feature/watchlist/domain/enities/watchlist_entity.dart';
 
 import '../../domain/repository/watchlist_repository.dart';
+import '../models/watchlist_model.dart';
 
 class WatchlistRepositoryImpl implements WatchlistRepository {
   const WatchlistRepositoryImpl({required this.localDataSource});
@@ -14,7 +15,7 @@ class WatchlistRepositoryImpl implements WatchlistRepository {
   @override
   Future<Either<Failure, Unit>> addWatchlist(WatchlistEntity watchlist) async {
     try {
-      await localDataSource.addWatchlist(watchlist);
+      await localDataSource.addWatchlist(WatchlistModel.fromEntity(watchlist));
       return Right(unit);
     } catch (e) {
       return Left(CacheFailure());
@@ -26,7 +27,9 @@ class WatchlistRepositoryImpl implements WatchlistRepository {
     WatchlistEntity watchlist,
   ) async {
     try {
-      await localDataSource.deleteWatchlist(watchlist);
+      await localDataSource.deleteWatchlist(
+        WatchlistModel.fromEntity(watchlist),
+      );
       return Right(unit);
     } catch (e) {
       return Left(CacheFailure());
@@ -48,7 +51,9 @@ class WatchlistRepositoryImpl implements WatchlistRepository {
     WatchlistEntity watchlist,
   ) async {
     try {
-      await localDataSource.updateWatchlist(watchlist);
+      await localDataSource.updateWatchlist(
+        WatchlistModel.fromEntity(watchlist),
+      );
       return Right(unit);
     } catch (e) {
       return Left(CacheFailure());

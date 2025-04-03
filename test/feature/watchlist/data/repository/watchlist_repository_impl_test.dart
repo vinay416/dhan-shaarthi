@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dhan_saarthi/core/exceptions.dart';
 import 'package:dhan_saarthi/core/failure.dart';
+import 'package:dhan_saarthi/feature/watchlist/data/models/watchlist_model.dart';
 import 'package:dhan_saarthi/feature/watchlist/data/repository/watchlist_repository_impl.dart';
 import 'package:dhan_saarthi/feature/watchlist/domain/enities/watchlist_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,7 +16,7 @@ void main() {
   group("Get Watchlist ", () {
     test("Get Watchlist success", () async {
       //assert
-      final List<WatchlistEntity> expected = [];
+      final List<WatchlistModel> expected = [];
       when(mockLocalSource.getWatchlist()).thenAnswer((_) async => expected);
       //act
       final response = await repoImpl.getWatchlist();

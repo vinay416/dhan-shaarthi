@@ -5,7 +5,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
 
-import 'package:dhan_saarthi/feature/watchlist/domain/enities/watchlist_entity.dart'
+import 'package:dhan_saarthi/feature/watchlist/data/models/watchlist_model.dart'
     as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -35,17 +35,17 @@ class MockMyWatchlistLocalDataSource extends _i1.Mock
   }
 
   @override
-  _i3.Future<List<_i4.WatchlistEntity>> getWatchlist() =>
+  _i3.Future<List<_i4.WatchlistModel>> getWatchlist() =>
       (super.noSuchMethod(
             Invocation.method(#getWatchlist, []),
-            returnValue: _i3.Future<List<_i4.WatchlistEntity>>.value(
-              <_i4.WatchlistEntity>[],
+            returnValue: _i3.Future<List<_i4.WatchlistModel>>.value(
+              <_i4.WatchlistModel>[],
             ),
           )
-          as _i3.Future<List<_i4.WatchlistEntity>>);
+          as _i3.Future<List<_i4.WatchlistModel>>);
 
   @override
-  _i3.Future<void> addWatchlist(_i4.WatchlistEntity? watchlist) =>
+  _i3.Future<void> addWatchlist(_i4.WatchlistModel? watchlist) =>
       (super.noSuchMethod(
             Invocation.method(#addWatchlist, [watchlist]),
             returnValue: _i3.Future<void>.value(),
@@ -54,7 +54,7 @@ class MockMyWatchlistLocalDataSource extends _i1.Mock
           as _i3.Future<void>);
 
   @override
-  _i3.Future<void> updateWatchlist(_i4.WatchlistEntity? watchlist) =>
+  _i3.Future<void> updateWatchlist(_i4.WatchlistModel? watchlist) =>
       (super.noSuchMethod(
             Invocation.method(#updateWatchlist, [watchlist]),
             returnValue: _i3.Future<void>.value(),
@@ -63,7 +63,7 @@ class MockMyWatchlistLocalDataSource extends _i1.Mock
           as _i3.Future<void>);
 
   @override
-  _i3.Future<void> deleteWatchlist(_i4.WatchlistEntity? watchlist) =>
+  _i3.Future<void> deleteWatchlist(_i4.WatchlistModel? watchlist) =>
       (super.noSuchMethod(
             Invocation.method(#deleteWatchlist, [watchlist]),
             returnValue: _i3.Future<void>.value(),
