@@ -9,4 +9,10 @@ sealed class WatchlistEvent extends Equatable {
 
 final class InitWatchlist extends WatchlistEvent {}
 
-final class CreateWatchlist extends WatchlistEvent {}
+final class CreateWatchlist extends WatchlistEvent {
+  const CreateWatchlist(this.name);
+  final String name;
+
+  @override
+  List<Object> get props => [name];
+}

@@ -16,3 +16,9 @@ final class WatchlistLoaded extends WatchlistState {
   @override
   List<Object> get props => [watchList];
 }
+
+final class WatchlistAdded extends WatchlistState {}
+
+final class LoadingAddWatchlist extends WatchlistState {}
+
+final class AddWatchlistFailed extends WatchlistState {}

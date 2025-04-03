@@ -63,5 +63,18 @@ void main() {
       verify(mockToast.show(any));
       verify(mockGet.call());
     });
+
+    test("Add new watchlist", ()async{
+      //assert
+      final watchlist = WatchlistEntity(id: "watchlist 1", fundsList: []);
+      when(mockAdd.call(watchlist)).thenAnswer((_)async=> Right(unit));
+      //expect Later - bloc states
+      final expected = [LoadingAddWatchlist(), WatchlistAdded()];
+      expectLater(bloc.stream, emitsInOrder(expected));
+      //act
+      bloc.add(InitWatchlist());
+      await untilCalled(mockGet.call());
+      //verify calls
+    });
   });
 }
