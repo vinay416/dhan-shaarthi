@@ -142,6 +142,7 @@ void main() {
           {"id": "SBI Direct", "navValue": "220.0"},
         ],
       });
+      when(mockPrefs.getStringList(any)).thenReturn(["watchlist 1"]);
       when(mockPrefs.getString(any)).thenReturn(watchlist1);
       when(mockPrefs.setString(any, any)).thenAnswer((_) async => true);
       //act
@@ -151,12 +152,29 @@ void main() {
       );
       await localSource.updateWatchlist(watchitem);
       //verify or expect
+      verify(mockPrefs.getStringList(any));
       verify(mockPrefs.getString(any));
       verify(mockPrefs.setString(any, any));
     });
 
+    test("Update [watchlist 1] get list failed", () async {
+      //assert
+      when(mockPrefs.getStringList(any)).thenReturn(null);
+      //act
+      final watchitem = WatchlistModel(
+        id: "watchlist 1",
+        fundsList: [FundModel(id: "TATA AIA", navValue: "320.0")],
+      );
+      final call = localSource.updateWatchlist(watchitem);
+      //verify or expect
+      expect(() async => await call, throwsA(TypeMatcher<CacheException>()));
+      verify(mockPrefs.getStringList(any));
+      verifyNoMoreInteractions(mockPrefs);
+    });
+
     test("Update [watchlist 1] failed due to old data error", () async {
       //assert
+      when(mockPrefs.getStringList(any)).thenReturn(["watchlist 1"]);
       when(mockPrefs.getString(any)).thenReturn(null);
       when(mockPrefs.setString(any, any)).thenAnswer((_) async => false);
       //act
@@ -167,6 +185,7 @@ void main() {
       final call = localSource.updateWatchlist(watchitem);
       //verify or expect
       expect(() async => await call, throwsA(TypeMatcher<CacheException>()));
+      verify(mockPrefs.getStringList(any));
       verify(mockPrefs.getString(any));
       verifyNoMoreInteractions(mockPrefs);
     });
@@ -180,6 +199,7 @@ void main() {
           {"id": "SBI Direct", "navValue": "220.0"},
         ],
       });
+      when(mockPrefs.getStringList(any)).thenReturn(["watchlist 1"]);
       when(mockPrefs.getString(any)).thenReturn(watchlist1);
       when(mockPrefs.setString(any, any)).thenAnswer((_) async => false);
       //act
@@ -190,6 +210,7 @@ void main() {
       final call = localSource.updateWatchlist(watchitem);
       //verify or expect
       expect(() async => await call, throwsA(TypeMatcher<CacheException>()));
+      verify(mockPrefs.getStringList(any));
       verify(mockPrefs.getString(any));
       verify(mockPrefs.setString(any, any));
     });

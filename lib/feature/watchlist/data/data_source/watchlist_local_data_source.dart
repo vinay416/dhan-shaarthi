@@ -72,6 +72,9 @@ class WatchlistLocalDataSourceImpl implements WatchlistLocalDataSource {
 
   @override
   Future<void> updateWatchlist(WatchlistModel watchlist) async {
+    final oldWatchList = preferences.getStringList(WATCHLIST_PREFS_KEY) ?? [];
+    if (oldWatchList.isEmpty) throw CacheException();
+    
     final oldDataString = preferences.getString(watchlist.id);
     if (oldDataString == null) throw CacheException();
 
