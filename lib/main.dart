@@ -3,6 +3,7 @@ import 'package:dhan_saarthi/feature/auth/presentation/bloc/auth_bloc.dart';
 import 'package:dhan_saarthi/feature/fund_detail/presentation/bloc/fund_detail_bloc.dart';
 import 'package:dhan_saarthi/feature/home/presentation/bloc/tab_bar/home_tab_bar_bloc.dart';
 import 'package:dhan_saarthi/feature/intro/presentation/bloc/intro_bloc.dart';
+import 'package:dhan_saarthi/feature/watchlist/presentation/bloc/watchlist_bloc.dart';
 import 'package:dhan_saarthi/routes/routes.dart';
 import 'package:dhan_saarthi/theme/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,7 @@ class MainApp extends StatelessWidget {
         BlocProvider(create: (_) => di<HomeTabBarBloc>()),
         BlocProvider(create: (_) => di<FundDetailBloc>()),
         BlocProvider(create: (_) => di<FundGraphBloc>()),
+        BlocProvider(create: (_) => di<WatchlistBloc>()),
       ],
       child: AuthWatcher(
         child: MaterialApp(

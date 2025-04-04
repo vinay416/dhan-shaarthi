@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:dhan_saarthi/feature/watchlist/domain/enities/watchlist_entity.dart';
+import 'package:dhan_saarthi/feature/watchlist/domain/usecase/add_watchlist_funds.dart';
+import 'package:dhan_saarthi/feature/watchlist/domain/usecase/delete_watchlist_fund.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,12 +19,16 @@ class WatchlistBloc extends Bloc<WatchlistEvent, WatchlistState> {
   final AddWatchlist addWatchlist;
   final UpdateWatchlist updateWatchlist;
   final DeleteWatchlist deleteWatchlist;
+  final AddWatchlistFund addWatchlistFund;
+  final DeleteWatchlistFund deleteWatchlistFund;
   final ToastHelper toastHelper;
   WatchlistBloc({
     required this.getWatchlist,
     required this.addWatchlist,
     required this.updateWatchlist,
     required this.deleteWatchlist,
+    required this.addWatchlistFund,
+    required this.deleteWatchlistFund,
     required this.toastHelper,
   }) : super(WatchlistLoading()) {
     on<InitWatchlist>(_onInitEvent);
