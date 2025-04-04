@@ -7,6 +7,8 @@ import 'dart:async' as _i5;
 
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:dhan_saarthi/core/failure.dart' as _i6;
+import 'package:dhan_saarthi/feature/watchlist/domain/enities/fund_entity.dart'
+    as _i8;
 import 'package:dhan_saarthi/feature/watchlist/domain/enities/watchlist_entity.dart'
     as _i7;
 import 'package:dhan_saarthi/feature/watchlist/domain/repository/watchlist_repository.dart'
@@ -177,6 +179,86 @@ class MockMyDeleteWatchlist extends _i1.Mock implements _i4.MyDeleteWatchlist {
               _FakeEither_1<_i6.Failure, _i3.Unit>(
                 this,
                 Invocation.method(#call, [watchlist]),
+              ),
+            ),
+          )
+          as _i5.Future<_i3.Either<_i6.Failure, _i3.Unit>>);
+}
+
+/// A class which mocks [MyDeleteWatchlistFund].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockMyDeleteWatchlistFund extends _i1.Mock
+    implements _i4.MyDeleteWatchlistFund {
+  MockMyDeleteWatchlistFund() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.WatchlistRepository get repo =>
+      (super.noSuchMethod(
+            Invocation.getter(#repo),
+            returnValue: _FakeWatchlistRepository_0(
+              this,
+              Invocation.getter(#repo),
+            ),
+          )
+          as _i2.WatchlistRepository);
+
+  @override
+  _i5.Future<_i3.Either<_i6.Failure, _i3.Unit>> call({
+    required String? watchlist,
+    required _i8.FundEntity? fund,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#call, [], {#watchlist: watchlist, #fund: fund}),
+            returnValue: _i5.Future<_i3.Either<_i6.Failure, _i3.Unit>>.value(
+              _FakeEither_1<_i6.Failure, _i3.Unit>(
+                this,
+                Invocation.method(#call, [], {
+                  #watchlist: watchlist,
+                  #fund: fund,
+                }),
+              ),
+            ),
+          )
+          as _i5.Future<_i3.Either<_i6.Failure, _i3.Unit>>);
+}
+
+/// A class which mocks [MyAddWatchlistFund].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockMyAddWatchlistFund extends _i1.Mock
+    implements _i4.MyAddWatchlistFund {
+  MockMyAddWatchlistFund() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.WatchlistRepository get repo =>
+      (super.noSuchMethod(
+            Invocation.getter(#repo),
+            returnValue: _FakeWatchlistRepository_0(
+              this,
+              Invocation.getter(#repo),
+            ),
+          )
+          as _i2.WatchlistRepository);
+
+  @override
+  _i5.Future<_i3.Either<_i6.Failure, _i3.Unit>> call({
+    required String? watchlist,
+    required _i8.FundEntity? fund,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#call, [], {#watchlist: watchlist, #fund: fund}),
+            returnValue: _i5.Future<_i3.Either<_i6.Failure, _i3.Unit>>.value(
+              _FakeEither_1<_i6.Failure, _i3.Unit>(
+                this,
+                Invocation.method(#call, [], {
+                  #watchlist: watchlist,
+                  #fund: fund,
+                }),
               ),
             ),
           )

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:dhan_saarthi/feature/watchlist/domain/enities/fund_entity.dart';
 import 'package:dhan_saarthi/feature/watchlist/domain/enities/watchlist_entity.dart';
 import 'package:dhan_saarthi/feature/watchlist/domain/usecase/add_watchlist_funds.dart';
 import 'package:dhan_saarthi/feature/watchlist/domain/usecase/delete_watchlist_fund.dart';
@@ -31,15 +32,121 @@ class WatchlistBloc extends Bloc<WatchlistEvent, WatchlistState> {
     required this.deleteWatchlistFund,
     required this.toastHelper,
   }) : super(WatchlistLoading()) {
-    on<InitWatchlist>(_onInitEvent);
+    on<InitWatchlistEvent>(_onInitEvent);
+    on<CreateWatchlistEvent>(_onCreateWatchlist);
+    on<ChangeWatchlistNameEvent>(_onChangeWatchlistName);
+    on<DeleteWatchlistEvent>(_onDeleteWatchlistEvent);
+    on<AddFundWatchlistEvent>(_onAddFundWatchlistEvent);
+    on<DeleteFundWatchlistEvent>(_onDeleteFundWatchlistEvent);
+  }
+
+  FutureOr<void> _onDeleteFundWatchlistEvent(
+    DeleteFundWatchlistEvent event,
+    emit,
+  ) async {
+    emit(DeleteFundWatchlistLoading());
+    final response = await deleteWatchlistFund.call(
+      watchlist: event.watchlist,
+      fund: event.fund,
+    );
+    final state = response.fold(
+      (failure) {
+        toastHelper.show(failure.msg);
+        return DeleteFundWatchlistFailure();
+      },
+      (unit) {
+        return DeletedFundWatchlist();
+      },
+    );
+    emit(state);
+  }
+
+  FutureOr<void> _onAddFundWatchlistEvent(
+    AddFundWatchlistEvent event,
+    emit,
+  ) async {
+    emit(AddFundWatchlistLoading());
+    final response = await addWatchlistFund.call(
+      watchlist: event.watchlist,
+      fund: event.fund,
+    );
+    final state = response.fold(
+      (failure) {
+        toastHelper.show(failure.msg);
+        return AddFundWatchlistFailure();
+      },
+      (unit) {
+        return AddedFundWatchlist();
+      },
+    );
+    emit(state);
+  }
+
+  FutureOr<void> _onDeleteWatchlistEvent(
+    DeleteWatchlistEvent event,
+    emit,
+  ) async {
+    emit(DeleteWatchlistLoading());
+    final response = await deleteWatchlist.call(event.name);
+    final state = response.fold(
+      (failure) {
+        toastHelper.show(failure.msg);
+        return DeleteWatchlistFailed();
+      },
+      (unit) {
+        return DeletedWatchlist();
+      },
+    );
+    emit(state);
+  }
+
+  FutureOr<void> _onChangeWatchlistName(
+    ChangeWatchlistNameEvent event,
+    emit,
+  ) async {
+    emit(AddWatchlistLoading());
+    final response = await updateWatchlist.call(
+      oldName: event.oldName,
+      newName: event.newName,
+    );
+    final state = response.fold(
+      (failure) {
+        toastHelper.show(failure.msg);
+        return WatchlistNameUpdateFailed();
+      },
+      (unit) {
+        return WatchlistNameUpdated();
+      },
+    );
+    emit(state);
+  }
+
+  FutureOr<void> _onCreateWatchlist(CreateWatchlistEvent event, emit) async {
+    emit(AddWatchlistLoading());
+    final response = await addWatchlist.call(event.name);
+    final state = response.fold(
+      (failure) {
+        toastHelper.show(failure.msg);
+        return AddWatchlistFailed();
+      },
+      (unit) {
+        return WatchlistAdded();
+      },
+    );
+    emit(state);
   }
 
   FutureOr<void> _onInitEvent(event, emit) async {
     final response = await getWatchlist.call();
-    final state = response.fold((failure) {
-      toastHelper.show(failure.msg);
-      return WatchlistLoaded([]);
-    }, (watchList) => WatchlistLoaded(watchList));
+    final state = response.fold(
+      (failure) {
+        toastHelper.show(failure.msg);
+        return WatchlistLoaded([]);
+      },
+      (watchList) {
+        return WatchlistLoaded(watchList);
+      },
+    );
     emit(state);
   }
 }
