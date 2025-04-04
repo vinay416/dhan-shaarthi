@@ -14,15 +14,15 @@ void main() {
         WatchlistModel(
           id: "watchlist 1",
           fundsList: [
-            FundModel(id: "Tata AIA", navValue: "120.0"),
-            FundModel(id: "SBI Direct", navValue: "220.0"),
+            FundModel(name: "Tata AIA", navValue: "120.0"),
+            FundModel(name: "SBI Direct", navValue: "220.0"),
           ],
         ),
         WatchlistModel(
           id: "watchlist 2",
           fundsList: [
-            FundModel(id: "MRF", navValue: "4120.0"),
-            FundModel(id: "Nivia", navValue: "920.0"),
+            FundModel(name: "MRF", navValue: "4120.0"),
+            FundModel(name: "Nivia", navValue: "920.0"),
           ],
         ),
       ];
@@ -41,15 +41,15 @@ void main() {
         WatchlistModel(
           id: "watchlist 1",
           fundsList: [
-            FundModel(id: "Tata AIA", navValue: "120.0"),
-            FundModel(id: "SBI Direct", navValue: "220.0"),
+            FundModel(name: "Tata AIA", navValue: "120.0"),
+            FundModel(name: "SBI Direct", navValue: "220.0"),
           ],
         ),
         WatchlistModel(
           id: "watchlist 2",
           fundsList: [
-            FundModel(id: "MRF", navValue: "4120.0"),
-            FundModel(id: "Nivia", navValue: "920.0"),
+            FundModel(name: "MRF", navValue: "4120.0"),
+            FundModel(name: "Nivia", navValue: "920.0"),
           ],
         ),
       ];

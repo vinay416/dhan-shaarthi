@@ -4,13 +4,6 @@ import 'package:dhan_saarthi/feature/watchlist/domain/enities/watchlist_entity.d
 class WatchlistModel extends WatchlistEntity {
   const WatchlistModel({required super.id, required super.fundsList});
 
-  factory WatchlistModel.fromEntity(WatchlistEntity entity) {
-    return WatchlistModel(
-      id: entity.id,
-      fundsList: entity.fundsList.map((e) => FundModel.fromEntity(e)).toList(),
-    );
-  }
-
   factory WatchlistModel.fromJson(Map<String, dynamic> json) {
     final String id = json["id"];
     final List list = json[id] ?? [];

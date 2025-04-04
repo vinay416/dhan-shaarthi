@@ -1,14 +1,20 @@
 import 'dart:convert';
 
 import 'package:dhan_saarthi/core/exceptions.dart';
+import 'package:dhan_saarthi/feature/watchlist/data/models/fund_model.dart';
 import 'package:dhan_saarthi/feature/watchlist/data/models/watchlist_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class WatchlistLocalDataSource {
   Future<List<WatchlistModel>> getWatchlist();
-  Future<void> addWatchlist(WatchlistModel watchlist);
-  Future<void> updateWatchlist(WatchlistModel watchlist);
-  Future<void> deleteWatchlist(WatchlistModel watchlist);
+  Future<void> addWatchlist(String watchlist);
+  Future<void> updateWatchlist({
+    required String oldName,
+    required String newName,
+  });
+  Future<void> deleteWatchlist(String watchlist);
+  Future<void> addFund({required String watchlist, required FundModel fund});
+  Future<void> deleteFund({required String watchlist, required FundModel fund});
 }
 
 // ignore: constant_identifier_names
@@ -17,46 +23,39 @@ const String WATCHLIST_PREFS_KEY = "WATCHLIST_PREFS_KEY";
 class WatchlistLocalDataSourceImpl implements WatchlistLocalDataSource {
   const WatchlistLocalDataSourceImpl(this.preferences);
   final SharedPreferences preferences;
+
   @override
-  Future<void> addWatchlist(WatchlistModel watchlist) async {
-    //Updating/Adding main Ids String List
+  Future<void> addWatchlist(String watchlist) async {
     final stringWatchList =
         preferences.getStringList(WATCHLIST_PREFS_KEY) ?? [];
-    final watchListId = watchlist.id;
-    if (stringWatchList.contains(watchListId)) {
-      throw CacheException(
-        msg: "Watchlist already exist with same $watchListId",
-      );
+    if (stringWatchList.contains(watchlist)) {
+      throw CacheException(msg: "$watchlist already exsist!");
     }
 
-    final List<String> newStringList = [...stringWatchList, watchListId];
+    final List<String> newStringList = [...stringWatchList, watchlist];
     final success = await preferences.setStringList(
       WATCHLIST_PREFS_KEY,
       newStringList,
     );
-    if (!success) throw CacheException();
-
-    //Adding Object
-    final encodedJson = jsonEncode(watchlist.toMap());
-    final objectSuccess = await preferences.setString(watchListId, encodedJson);
-    if (!objectSuccess) throw CacheException();
+    if (!success) throw CacheException(msg: "Saving failed!");
   }
 
   @override
-  Future<void> deleteWatchlist(WatchlistModel watchlist) async {
+  Future<void> deleteWatchlist(String watchlist) async {
     final oldWatchList = preferences.getStringList(WATCHLIST_PREFS_KEY) ?? [];
-    if (oldWatchList.isEmpty) throw CacheException();
+    if (oldWatchList.isEmpty) {
+      throw CacheException(msg: "Watchlist ID not found!");
+    }
 
-    final dataDeleted = await preferences.remove(watchlist.id);
-    if (!dataDeleted) throw CacheException();
-
-    oldWatchList.remove(watchlist.id);
+    oldWatchList.remove(watchlist);
     final newWatchlist = [...oldWatchList];
     final isUpdated = await preferences.setStringList(
       WATCHLIST_PREFS_KEY,
       newWatchlist,
     );
-    if (!isUpdated) throw CacheException();
+    if (!isUpdated) throw CacheException(msg: "Updating failed!");
+
+    preferences.remove(watchlist);
   }
 
   @override
@@ -66,10 +65,10 @@ class WatchlistLocalDataSourceImpl implements WatchlistLocalDataSource {
         preferences.getStringList(WATCHLIST_PREFS_KEY) ?? [];
 
     for (String id in stringWatchList) {
-      final fund = preferences.getString(id) ?? "{}";
-      final Map<String, dynamic> jecodedJson = jsonDecode(fund);
-      if (jecodedJson.isEmpty) continue;
-      final watchItem = WatchlistModel.fromJson(jecodedJson);
+      final funds = preferences.getStringList(id) ?? [];
+      final fundsList =
+          funds.map((e) => FundModel.fromJson(jsonDecode(e))).toList();
+      final watchItem = WatchlistModel(id: id, fundsList: fundsList);
       watchlist.add(watchItem);
     }
 
@@ -77,18 +76,80 @@ class WatchlistLocalDataSourceImpl implements WatchlistLocalDataSource {
   }
 
   @override
-  Future<void> updateWatchlist(WatchlistModel watchlist) async {
+  Future<void> updateWatchlist({
+    required String oldName,
+    required String newName,
+  }) async {
     final oldWatchList = preferences.getStringList(WATCHLIST_PREFS_KEY) ?? [];
-    if (oldWatchList.isEmpty) throw CacheException();
+    if (!oldWatchList.contains(oldName)) {
+      throw CacheException(msg: "Watchlist ID not found!");
+    }
 
-    final oldDataString = preferences.getString(watchlist.id);
-    if (oldDataString == null) throw CacheException();
-
-    final newWatchlistString = jsonEncode(watchlist.toMap());
-    final success = await preferences.setString(
-      watchlist.id,
-      newWatchlistString,
+    oldWatchList.remove(oldName);
+    final updatedWatchList = [...oldWatchList, newName];
+    final updateListSuccess = await preferences.setStringList(
+      WATCHLIST_PREFS_KEY,
+      updatedWatchList,
     );
-    if (!success) throw CacheException();
+    if (!updateListSuccess) throw CacheException(msg: "Updating failed!");
+
+    final fundDataList = preferences.getStringList(oldName) ?? [];
+
+    final success = await preferences.setStringList(newName, fundDataList);
+    if (!success) throw CacheException(msg: "Updating name failed!");
+    preferences.remove(oldName);
+  }
+
+  @override
+  Future<void> addFund({
+    required String watchlist,
+    required FundModel fund,
+  }) async {
+    final watchStringList =
+        preferences.getStringList(WATCHLIST_PREFS_KEY) ?? [];
+    if (!watchStringList.contains(watchlist)) {
+      throw CacheException(msg: "Watchlist ID not found!");
+    }
+
+    final fundsList = preferences.getStringList(watchlist) ?? [];
+    final oldFunds =
+        fundsList.map((e) => FundModel.fromJson(jsonDecode(e))).toList();
+    final isExsist =
+        oldFunds
+            .where((e) => e.name.toLowerCase() == fund.name.toLowerCase())
+            .toList()
+            .isNotEmpty;
+
+    if (isExsist) throw CacheException(msg: "${fund.name} already exsist!");
+
+    final fundString = jsonEncode(fund.toMap());
+    final added = await preferences.setStringList(watchlist, [
+      ...fundsList,
+      fundString,
+    ]);
+    if (!added) throw CacheException(msg: "Saving failed!");
+  }
+
+  @override
+  Future<void> deleteFund({
+    required String watchlist,
+    required FundModel fund,
+  }) async {
+    final fundsTringList = preferences.getStringList(watchlist) ?? [];
+    final oldFunds =
+        fundsTringList.map((e) => FundModel.fromJson(jsonDecode(e))).toList();
+    final isExsist =
+        oldFunds
+            .where((e) => e.name.toLowerCase() == fund.name.toLowerCase())
+            .toList()
+            .isNotEmpty;
+    if (!isExsist) throw CacheException(msg: "Fund ID not found!");
+
+    oldFunds.removeWhere(
+      (e) => e.name.toLowerCase() == fund.name.toLowerCase(),
+    );
+    final newFundsJson = oldFunds.map((e) => jsonEncode(e.toMap())).toList();
+    final success = await preferences.setStringList(watchlist, newFundsJson);
+    if (!success) throw CacheException(msg: "Updating failed!");
   }
 }

@@ -5,6 +5,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
 
+import 'package:dhan_saarthi/feature/watchlist/data/models/fund_model.dart'
+    as _i5;
 import 'package:dhan_saarthi/feature/watchlist/data/models/watchlist_model.dart'
     as _i4;
 import 'package:mockito/mockito.dart' as _i1;
@@ -45,7 +47,7 @@ class MockMyWatchlistLocalDataSource extends _i1.Mock
           as _i3.Future<List<_i4.WatchlistModel>>);
 
   @override
-  _i3.Future<void> addWatchlist(_i4.WatchlistModel? watchlist) =>
+  _i3.Future<void> addWatchlist(String? watchlist) =>
       (super.noSuchMethod(
             Invocation.method(#addWatchlist, [watchlist]),
             returnValue: _i3.Future<void>.value(),
@@ -54,18 +56,54 @@ class MockMyWatchlistLocalDataSource extends _i1.Mock
           as _i3.Future<void>);
 
   @override
-  _i3.Future<void> updateWatchlist(_i4.WatchlistModel? watchlist) =>
+  _i3.Future<void> updateWatchlist({
+    required String? oldName,
+    required String? newName,
+  }) =>
       (super.noSuchMethod(
-            Invocation.method(#updateWatchlist, [watchlist]),
+            Invocation.method(#updateWatchlist, [], {
+              #oldName: oldName,
+              #newName: newName,
+            }),
             returnValue: _i3.Future<void>.value(),
             returnValueForMissingStub: _i3.Future<void>.value(),
           )
           as _i3.Future<void>);
 
   @override
-  _i3.Future<void> deleteWatchlist(_i4.WatchlistModel? watchlist) =>
+  _i3.Future<void> deleteWatchlist(String? watchlist) =>
       (super.noSuchMethod(
             Invocation.method(#deleteWatchlist, [watchlist]),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
+
+  @override
+  _i3.Future<void> addFund({
+    required String? watchlist,
+    required _i5.FundModel? fund,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#addFund, [], {
+              #watchlist: watchlist,
+              #fund: fund,
+            }),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
+
+  @override
+  _i3.Future<void> deleteFund({
+    required String? watchlist,
+    required _i5.FundModel? fund,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#deleteFund, [], {
+              #watchlist: watchlist,
+              #fund: fund,
+            }),
             returnValue: _i3.Future<void>.value(),
             returnValueForMissingStub: _i3.Future<void>.value(),
           )

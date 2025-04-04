@@ -20,7 +20,7 @@ void main() {
       ),
     ).thenAnswer((_) async => Right(unit));
     //act
-    final fund = FundEntity(id: "TATA AIA", navValue: "350.0");
+    final fund = FundEntity(name: "TATA AIA", navValue: "350.0");
     final response = await usecase.call(watchlist: "watchlist 1", fund: fund);
     //verify or expect
     verify(
