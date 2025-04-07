@@ -48,6 +48,7 @@ class _FundDetailPageState extends State<FundDetailPage> {
   Widget buildLoaded(FundDetailsEntity details) {
     return Scaffold(
       appBar: CustomAppBar(
+        leading: false,
         actions: [
           IconButton(
             onPressed: () {},
