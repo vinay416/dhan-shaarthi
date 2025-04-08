@@ -1,9 +1,9 @@
 import 'package:dhan_saarthi/feature/home/presentation/pages/charts_page.dart';
 import 'package:dhan_saarthi/feature/home/presentation/pages/home_page.dart';
-import 'package:dhan_saarthi/feature/home/presentation/pages/watchlist_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../watchlist/presentation/pages/watchlist_page.dart';
 import '../bloc/tab_bar/home_tab_bar_bloc.dart';
 import '../widgets/home_tab_bar.dart';
 

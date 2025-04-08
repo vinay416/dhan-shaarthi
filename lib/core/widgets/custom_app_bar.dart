@@ -10,10 +10,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.actions = const [],
     this.title = "",
     this.leading = true,
+    this.textStyle,
   });
   final List<Widget> actions;
   final String title;
   final bool leading;
+  final TextStyle? textStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               )
               : SizedBox.shrink(),
       titleSpacing: -5,
-      title: Text(title, style: semiBoldTextStyle.copyWith(fontSize: 20)),
+      leadingWidth: leading ? null : 30,
+      title: Text(
+        title,
+        style: textStyle ?? semiBoldTextStyle.copyWith(fontSize: 20),
+      ),
       actions: actions,
     );
   }

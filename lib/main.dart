@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'feature/auth/presentation/pages/auth_watcher.dart';
 import 'feature/fund_detail/presentation/bloc/fund_graph/fund_graph_bloc.dart';
+import 'feature/watchlist/presentation/bloc/manage_watchlist/manage_watchlist_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,6 +34,7 @@ class MainApp extends StatelessWidget {
         BlocProvider(create: (_) => di<FundDetailBloc>()),
         BlocProvider(create: (_) => di<FundGraphBloc>()),
         BlocProvider(create: (_) => di<WatchlistBloc>()),
+        BlocProvider(create: (_) => di<ManageWatchlistBloc>()),
       ],
       child: AuthWatcher(
         child: MaterialApp(

@@ -18,24 +18,24 @@ final class WatchlistLoaded extends WatchlistState {
   List<Object> get props => [watchList];
 }
 
-//CREATE NEW WATCHLIST
-final class AddWatchlistLoading extends WatchlistState {}
+// //CREATE NEW WATCHLIST
+// final class AddWatchlistLoading extends WatchlistState {}
 
-final class WatchlistAdded extends WatchlistState {}
+// final class WatchlistAdded extends WatchlistState {}
 
-final class AddWatchlistFailed extends WatchlistState {}
+// final class AddWatchlistFailed extends WatchlistState {}
 
-//UPDATE WATCHLIST NAME
-final class WatchlistNameUpdated extends WatchlistState {}
+// //UPDATE WATCHLIST NAME
+// final class WatchlistNameUpdated extends WatchlistState {}
 
-final class WatchlistNameUpdateFailed extends WatchlistState {}
+// final class WatchlistNameUpdateFailed extends WatchlistState {}
 
-//DELETE WATCHLIST
-final class DeleteWatchlistLoading extends WatchlistState {}
+// //DELETE WATCHLIST
+// final class DeleteWatchlistLoading extends WatchlistState {}
 
-final class DeletedWatchlist extends WatchlistState {}
+// final class DeletedWatchlist extends WatchlistState {}
 
-final class DeleteWatchlistFailed extends WatchlistState {}
+// final class DeleteWatchlistFailed extends WatchlistState {}
 
 //ADD FUND TO WATCHLIST
 final class AddFundWatchlistLoading extends WatchlistState {}

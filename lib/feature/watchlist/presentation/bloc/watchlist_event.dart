@@ -9,33 +9,33 @@ sealed class WatchlistEvent extends Equatable {
 
 final class InitWatchlistEvent extends WatchlistEvent {}
 
-final class CreateWatchlistEvent extends WatchlistEvent {
-  const CreateWatchlistEvent(this.name);
-  final String name;
+// final class CreateWatchlistEvent extends WatchlistEvent {
+//   const CreateWatchlistEvent(this.name);
+//   final String name;
 
-  @override
-  List<Object> get props => [name];
-}
+//   @override
+//   List<Object> get props => [name];
+// }
 
-final class ChangeWatchlistNameEvent extends WatchlistEvent {
-  const ChangeWatchlistNameEvent({
-    required this.oldName,
-    required this.newName,
-  });
-  final String oldName;
-  final String newName;
+// final class ChangeWatchlistNameEvent extends WatchlistEvent {
+//   const ChangeWatchlistNameEvent({
+//     required this.oldName,
+//     required this.newName,
+//   });
+//   final String oldName;
+//   final String newName;
 
-  @override
-  List<Object> get props => [oldName, newName];
-}
+//   @override
+//   List<Object> get props => [oldName, newName];
+// }
 
-final class DeleteWatchlistEvent extends WatchlistEvent {
-  const DeleteWatchlistEvent(this.name);
-  final String name;
+// final class DeleteWatchlistEvent extends WatchlistEvent {
+//   const DeleteWatchlistEvent(this.name);
+//   final String name;
 
-  @override
-  List<Object> get props => [name];
-}
+//   @override
+//   List<Object> get props => [name];
+// }
 
 final class AddFundWatchlistEvent extends WatchlistEvent {
   const AddFundWatchlistEvent({required this.watchlist, required this.fund});

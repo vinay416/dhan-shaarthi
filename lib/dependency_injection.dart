@@ -13,6 +13,7 @@ import 'package:dhan_saarthi/feature/intro/data/repository/intro_repository_impl
 import 'package:dhan_saarthi/feature/intro/presentation/bloc/intro_bloc.dart';
 import 'package:dhan_saarthi/feature/watchlist/data/data_source/watchlist_local_data_source.dart';
 import 'package:dhan_saarthi/feature/watchlist/data/repository/watchlist_repository_impl.dart';
+import 'package:dhan_saarthi/feature/watchlist/presentation/bloc/manage_watchlist/manage_watchlist_bloc.dart';
 import 'package:dhan_saarthi/feature/watchlist/presentation/bloc/watchlist_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
@@ -71,8 +72,9 @@ Future<void> injectDependencies() async {
   di.registerLazySingleton<SetCompletedIntro>(() => SetCompletedIntro(di()));
   di.registerLazySingleton<IntroRepository>(() => IntroRepositoryImpl(di()));
   final prefs = await SharedPreferences.getInstance();
+  di.registerLazySingleton<SharedPreferences>(() => prefs);
   di.registerLazySingleton<IntroLocalDataSource>(
-    () => IntroLocalDataSourceImpl(prefs),
+    () => IntroLocalDataSourceImpl(di()),
   );
 
   di.registerFactory<HomeTabBarBloc>(() => HomeTabBarBloc());
@@ -91,11 +93,16 @@ Future<void> injectDependencies() async {
   di.registerFactory<WatchlistBloc>(
     () => WatchlistBloc(
       getWatchlist: di(),
+      addWatchlistFund: di(),
+      deleteWatchlistFund: di(),
+      toastHelper: di(),
+    ),
+  );
+  di.registerFactory<ManageWatchlistBloc>(
+    () => ManageWatchlistBloc(
       addWatchlist: di(),
       updateWatchlist: di(),
       deleteWatchlist: di(),
-      addWatchlistFund: di(),
-      deleteWatchlistFund: di(),
       toastHelper: di(),
     ),
   );

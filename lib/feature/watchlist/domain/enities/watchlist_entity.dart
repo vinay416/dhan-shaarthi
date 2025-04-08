@@ -8,4 +8,8 @@ class WatchlistEntity extends Equatable {
 
   @override
   List<Object?> get props => [id, fundsList];
+
+  factory WatchlistEntity.empty() {
+    return WatchlistEntity(id: "", fundsList: []);
+  }
 }
