@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:dhan_saarthi/feature/watchlist/domain/enities/fund_entity.dart';
 import 'package:dhan_saarthi/feature/watchlist/domain/enities/watchlist_entity.dart';
 import 'package:dhan_saarthi/feature/watchlist/domain/usecase/add_watchlist_funds.dart';
@@ -64,6 +65,7 @@ class WatchlistBloc extends Bloc<WatchlistEvent, WatchlistState> {
         return AddFundWatchlistFailure();
       },
       (unit) {
+        toastHelper.show("Added to ${event.watchlist}");
         return AddedFundWatchlist();
       },
     );

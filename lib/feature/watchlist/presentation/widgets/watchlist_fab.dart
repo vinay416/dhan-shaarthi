@@ -14,7 +14,7 @@ class WatchlistFAB extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 90,
+      width: 110,
       child: RectButton(
         onTap: () {
           showModalBottomSheet(
@@ -29,7 +29,8 @@ class WatchlistFAB extends StatelessWidget {
           );
         },
         isEnabled: true,
-        title: "edit",
+        title: "edit ",
+        icon: Icon(Icons.edit),
         textStyle: mediumTextStyle.copyWith(fontSize: 18, letterSpacing: 0.5),
         borderRadius: BorderRadius.circular(50),
       ),

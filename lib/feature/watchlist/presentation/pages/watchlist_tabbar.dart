@@ -16,7 +16,7 @@ class WatchlistTabbar extends StatelessWidget {
       children: [
         watchList.isEmpty ? WatchlistEmptyPage() : buildTabView(),
         Positioned(
-          bottom: 80,
+          bottom: 50,
           right: 20,
           child: WatchlistFAB(watchlistList: watchList),
         ),
@@ -28,6 +28,7 @@ class WatchlistTabbar extends StatelessWidget {
     return DefaultTabController(
       length: watchList.length,
       child: Column(
+        spacing: 20,
         children: [
           TabBar(
             tabs: watchList.map(_tab).toList(),
@@ -42,10 +43,7 @@ class WatchlistTabbar extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: TabBarView(children: watchList.map(_tabview).toList()),
-            ),
+            child: TabBarView(children: watchList.map(_tabview).toList()),
           ),
         ],
       ),
