@@ -1,4 +1,3 @@
-import 'package:dhan_saarthi/feature/watchlist/domain/enities/watchlist_entity.dart';
 import 'package:dhan_saarthi/feature/watchlist/presentation/bloc/watchlist_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

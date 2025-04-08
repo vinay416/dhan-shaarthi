@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/watchlist_bloc.dart';
-import '../widgets/watchlist_fab.dart';
 
 class WatchlistPage extends StatefulWidget {
   const WatchlistPage({super.key});
