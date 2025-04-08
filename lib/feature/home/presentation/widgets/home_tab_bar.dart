@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../utils/home_string_const.dart';
 
+// ignore: constant_identifier_names
+const KHomeTabHeight = 82.0;
+
 class HomeTabBar extends StatelessWidget {
   const HomeTabBar({super.key});
 
@@ -17,7 +20,7 @@ class HomeTabBar extends StatelessWidget {
         ),
         color: kBlackColor,
       ),
-      height: 82,
+      height: KHomeTabHeight,
       width: MediaQuery.of(context).size.width,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

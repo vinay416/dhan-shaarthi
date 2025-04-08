@@ -1,5 +1,6 @@
 import 'package:dhan_saarthi/core/widgets/custom_app_bar.dart';
 import 'package:dhan_saarthi/feature/home/presentation/utils/home_string_const.dart';
+import 'package:dhan_saarthi/feature/home/presentation/widgets/home_tab_bar.dart';
 import 'package:dhan_saarthi/feature/watchlist/presentation/pages/watchlist_tab_page.dart';
 import 'package:dhan_saarthi/theme/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,12 @@ class _WatchlistPageState extends State<WatchlistPage> {
         title: HomeStringConst.kWatchlist,
         textStyle: semiBoldTextStyle.copyWith(fontSize: 24),
       ),
-      body: WatchlistTabPage(),
+      body: Column(
+        children: [
+          Expanded(child: WatchlistTabPage()),
+          SizedBox(height: KHomeTabHeight),
+        ],
+      ),
     );
   }
 }

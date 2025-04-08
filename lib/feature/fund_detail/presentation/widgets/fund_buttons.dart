@@ -9,7 +9,7 @@ class FundButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.black87,
+      color: k3D3D3DColor,
       height: 73,
       width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.symmetric(horizontal: 26),

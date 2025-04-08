@@ -3,6 +3,7 @@ import 'package:dhan_saarthi/feature/watchlist/presentation/widgets/watchlist_fa
 import 'package:dhan_saarthi/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
+import 'fund/funds_tab_view.dart';
 import 'watchlist_empty_page.dart';
 
 class WatchlistTabbar extends StatelessWidget {
@@ -15,7 +16,7 @@ class WatchlistTabbar extends StatelessWidget {
       children: [
         watchList.isEmpty ? WatchlistEmptyPage() : buildTabView(),
         Positioned(
-          bottom: 120,
+          bottom: 80,
           right: 20,
           child: WatchlistFAB(watchlistList: watchList),
         ),
@@ -62,6 +63,6 @@ class WatchlistTabbar extends StatelessWidget {
   }
 
   Widget _tabview(WatchlistEntity watchList) {
-    return Column(children: [Text(watchList.id)]);
+    return FundsTabView(watchlist: watchList);
   }
 }
