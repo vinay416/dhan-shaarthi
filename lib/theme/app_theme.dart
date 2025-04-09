@@ -11,7 +11,7 @@ class AppTheme {
         foregroundColor: kWhiteColor,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: kBlackColor,
-          statusBarBrightness: Brightness.light,
+          statusBarBrightness: Brightness.dark,
           statusBarIconBrightness: Brightness.light,
           systemNavigationBarColor: kBlackColor,
           systemNavigationBarIconBrightness: Brightness.dark,
