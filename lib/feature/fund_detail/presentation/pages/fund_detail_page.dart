@@ -62,7 +62,7 @@ class _FundDetailPageState extends State<FundDetailPage> {
       body: Stack(
         children: [
           buildScreen(details),
-          Positioned(bottom: 0, child: FundButtons()),
+          Positioned(bottom: 0, child: SafeArea(child: FundButtons())),
         ],
       ),
     );

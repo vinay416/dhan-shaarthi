@@ -50,12 +50,14 @@ class VerifyAuthPage extends StatelessWidget {
   }
 
   Widget buildBottom() {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Align(alignment: Alignment.center, child: TermsPolicy()),
-        SizedBox(height: 18),
-      ],
+    return SafeArea(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Align(alignment: Alignment.center, child: TermsPolicy()),
+          SizedBox(height: 18),
+        ],
+      ),
     );
   }
 }

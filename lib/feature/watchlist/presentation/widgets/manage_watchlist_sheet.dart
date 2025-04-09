@@ -17,7 +17,7 @@ class ManageWatchlistSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FractionallySizedBox(
-      heightFactor: watchlistList.isEmpty ? 0.12 : 0.5,
+      heightFactor: watchlistList.isEmpty ? 0.13 : 0.5,
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(

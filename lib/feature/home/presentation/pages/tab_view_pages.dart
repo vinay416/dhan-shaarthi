@@ -26,7 +26,7 @@ class TabViewPages extends StatelessWidget {
               return HomePage();
             },
           ),
-          Positioned(bottom: 0, child: HomeTabBar()),
+          Positioned(bottom: 0, child: SafeArea(child: HomeTabBar())),
         ],
       ),
     );
