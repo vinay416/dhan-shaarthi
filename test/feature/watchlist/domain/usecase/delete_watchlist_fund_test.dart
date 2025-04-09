@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:dhan_saarthi/feature/watchlist/domain/enities/fund_entity.dart';
-import 'package:dhan_saarthi/feature/watchlist/domain/usecase/add_watchlist_funds.dart';
 import 'package:dhan_saarthi/feature/watchlist/domain/usecase/delete_watchlist_fund.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';

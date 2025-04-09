@@ -99,6 +99,7 @@ class _PhoneNoInputFieldState extends State<PhoneNoInputField> {
           ),
           hintText: "9856671239",
           hintStyle: regularTextStyle.copyWith(
+            // ignore: deprecated_member_use
             color: kWhiteColor.withOpacity(0.5),
           ),
           isCollapsed: true,

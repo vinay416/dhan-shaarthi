@@ -79,6 +79,7 @@ class _TwoLineChartState extends State<TwoLineChart> {
             belowBarData: BarAreaData(
               show: true,
               gradient: LinearGradient(
+                // ignore: deprecated_member_use
                 colors: [k6D6D6DColor.withOpacity(0.2), kBlackColor],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -94,6 +95,7 @@ class _TwoLineChartState extends State<TwoLineChart> {
             belowBarData: BarAreaData(
               show: true,
               gradient: LinearGradient(
+                // ignore: deprecated_member_use
                 colors: [kBlackColor.withOpacity(0.0), kBlackColor],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,

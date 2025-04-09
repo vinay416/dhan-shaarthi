@@ -1,3 +1,5 @@
+// ignore_for_file: overridden_fields
+
 import 'package:equatable/equatable.dart';
 
 sealed class Failure extends Equatable {
@@ -10,6 +12,7 @@ sealed class Failure extends Equatable {
 }
 
 class ServerFailure extends Failure {
+  @override
   final String msg = "Server failure";
 
   @override
@@ -18,6 +21,7 @@ class ServerFailure extends Failure {
 
 class CacheFailure extends Failure {
   const CacheFailure({this.msg = "Cache failure"});
+  @override
   final String msg;
 
   @override
@@ -25,6 +29,7 @@ class CacheFailure extends Failure {
 }
 
 class ParsingFailure extends Failure {
+  @override
   final String msg = "Parsing failure";
 
   @override
@@ -33,6 +38,7 @@ class ParsingFailure extends Failure {
 
 class SendOTPFailure extends Failure {
   const SendOTPFailure(this.msg);
+  @override
   final String msg;
 
   @override
@@ -41,6 +47,7 @@ class SendOTPFailure extends Failure {
 
 class VerifyOTPFailure extends Failure {
   const VerifyOTPFailure(this.msg);
+  @override
   final String msg;
 
   @override
@@ -49,6 +56,7 @@ class VerifyOTPFailure extends Failure {
 
 class AuthFailure extends Failure {
   const AuthFailure(this.msg);
+  @override
   final String msg;
 
   @override

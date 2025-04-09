@@ -39,6 +39,7 @@ class _FundPerformanceSliderState extends State<FundPerformanceSlider> {
             },
             thumbColor: kBlueColor,
             activeColor: kWhiteColor,
+            // ignore: deprecated_member_use
             inactiveColor: kBlueColor.withOpacity(0.2),
           ),
         ),

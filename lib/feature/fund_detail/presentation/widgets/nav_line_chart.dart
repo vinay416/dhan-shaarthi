@@ -57,6 +57,7 @@ class _NAVLineChartState extends State<NAVLineChart> {
             belowBarData: BarAreaData(
               show: true,
               gradient: LinearGradient(
+                // ignore: deprecated_member_use
                 colors: [k6D6D6DColor.withOpacity(0.5), kBlackColor],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
