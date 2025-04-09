@@ -85,8 +85,11 @@ class WatchlistLocalDataSourceImpl implements WatchlistLocalDataSource {
       throw CacheException(msg: "Watchlist ID not found!");
     }
 
-    oldWatchList.remove(oldName);
-    final updatedWatchList = [...oldWatchList, newName];
+    final updatedWatchList = _replaceItemAtIndex(
+      oldWatchList: oldWatchList,
+      oldName: oldName,
+      newName: newName,
+    );
     final updateListSuccess = await preferences.setStringList(
       WATCHLIST_PREFS_KEY,
       updatedWatchList,
@@ -98,6 +101,20 @@ class WatchlistLocalDataSourceImpl implements WatchlistLocalDataSource {
     final success = await preferences.setStringList(newName, fundDataList);
     if (!success) throw CacheException(msg: "Updating name failed!");
     preferences.remove(oldName);
+  }
+
+  List<String> _replaceItemAtIndex({
+    required List<String> oldWatchList,
+    required String oldName,
+    required String newName,
+  }) {
+    final int index = oldWatchList.indexOf(oldName);
+    if (index < 0) throw CacheException(msg: "Old Item index $index");
+
+    oldWatchList.remove(oldName);
+    final updatedWatchList = [...oldWatchList];
+    updatedWatchList.insert(index, newName);
+    return updatedWatchList;
   }
 
   @override
